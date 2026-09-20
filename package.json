@@ -1,0 +1,23 @@
+{
+  "name": "arka-assist",
+  "version": "1.0.0",
+  "description": "Multimodal AI Farm Intelligence and Decision Support System",
+  "main": "index.js",
+  "scripts": {
+    "start": "python index.py",
+    "dev": "python index.py",
+    "node-start": "node index.js"
+  },
+  "keywords": [
+    "agtech",
+    "ai",
+    "agriculture",
+    "farm-twin",
+    "multimodal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framer-motion": "^13.4.0"
+  }
+}

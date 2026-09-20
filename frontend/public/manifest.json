@@ -1,0 +1,17 @@
+{
+  "short_name": "AgriVision",
+  "name": "AGRI VISION - AI-Powered Smart Agriculture Decision Support System",
+  "icons": [
+    {
+      "src": "/leaf.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B1610",
+  "theme_color": "#165B33",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "description": "Smart Decisions. Better Farming. AI-powered decision support for farmers with full offline capability."
+}

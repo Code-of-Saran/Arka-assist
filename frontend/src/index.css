@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 22 91 51;      /* #165B33 */
+    --color-primary-light: 46 125 68;/* #2E7D44 */
+    --color-leaf: 91 163 60;        /* #5BA33C */
+    --color-earth: 158 128 94;      /* #9E805E */
+    --color-cream: 251 249 244;     /* #FBF9F4 */
+    --color-cream-card: 255 255 255;/* #FFFFFF */
+    --color-text-main: 39 29 21;    /* #271D15 */
+    --color-text-muted: 106 80 56;  /* #6A5038 */
+    --color-border: 223 211 188;    /* #DFD3BC */
+  }
+
+  .dark {
+    --color-primary: 34 99 54;      /* #226336 */
+    --color-primary-light: 61 143 87;/* #3D8F57 */
+    --color-leaf: 123 190 92;       /* #7BBE5C */
+    --color-earth: 181 156 124;     /* #B59C7C */
+    --color-cream: 11 22 16;        /* #0B1610 */
+    --color-cream-card: 18 36 26;   /* #12241A */
+    --color-text-main: 240 247 242; /* #F0F7F2 */
+    --color-text-muted: 139 166 149;/* #8BA695 */
+    --color-border: 36 69 49;       /* #244531 */
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: rgb(var(--color-text-main));
+    background-color: rgb(var(--color-cream));
+    background-image: radial-gradient(rgba(158, 128, 94, 0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3D8F57;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2E7D44;
+}
+
+/* Glassmorphism utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(223, 211, 188, 0.6);
+}
+
+.dark .glass-card {
+  background: rgba(18, 36, 26, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(36, 69, 49, 0.7);
+}
+
+.glass-nav {
+  background: rgba(251, 249, 244, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(223, 211, 188, 0.6);
+}
+
+.dark .glass-nav {
+  background: rgba(11, 22, 16, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(36, 69, 49, 0.7);
+}
+
+/* Purpose-driven Agriculture Button System */
+.btn-agro-primary {
+  background: linear-gradient(135deg, #2E7D44 0%, #1F5A31 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(46, 125, 68, 0.4);
+  box-shadow: 0 4px 14px rgba(46, 125, 68, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-agro-primary:hover {
+  background: linear-gradient(135deg, #368E4E 0%, #246B3B 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(46, 125, 68, 0.35);
+}
+
+.btn-agro-weather {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(2, 132, 199, 0.4);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-agro-weather:hover {
+  background: linear-gradient(135deg, #0369A1 0%, #075985 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+}
+
+.btn-agro-market {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-agro-market:hover {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+}
+
+.btn-agro-sell {
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(234, 88, 12, 0.4);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-agro-sell:hover {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+}
+
+.btn-agro-voice {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(5, 150, 105, 0.4);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-agro-voice:hover {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+}
+
+/* Animations & Transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-loading {
+  background: linear-gradient(90deg, rgba(22, 91, 51, 0.05) 25%, rgba(22, 91, 51, 0.15) 50%, rgba(22, 91, 51, 0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+.dark .shimmer-loading {
+  background: linear-gradient(90deg, rgba(46, 125, 68, 0.1) 25%, rgba(46, 125, 68, 0.25) 50%, rgba(46, 125, 68, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+.card-hover-lift {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -4px rgba(15, 64, 36, 0.12);
+}
+
+/* Subtle Hero Background Zoom */
+@keyframes subtleHeroZoom {
+  0% { transform: scale(1.0); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1.0); }
+}
+
+.animate-hero-bg-zoom {
+  animation: subtleHeroZoom 24s ease-in-out infinite alternate;
+}
+
+/* Glassmorphic overlay card styling for Hero */
+.hero-glass-card {
+  background: rgba(11, 35, 19, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-glass-card-light {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+

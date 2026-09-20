@@ -1,0 +1,56 @@
+{
+  "suggested_prompts": [
+    {
+      "en": "Which crop is suitable for high rainfall?",
+      "ta": "அதிக மழைப்பொழிவுக்கு ஏற்ற பயிர் எது?"
+    },
+    {
+      "en": "How should I prepare soil for sowing?",
+      "ta": "விதைப்புக்கு நிலத்தை எவ்வாறு தயார் செய்ய வேண்டும்?"
+    },
+    {
+      "en": "What should I do if crop leaves turn yellow?",
+      "ta": "பயிர் இலைகள் மஞ்சளானால் என்ன செய்ய வேண்டும்?"
+    },
+    {
+      "en": "Which government schemes can I check for subsidies?",
+      "ta": "மானியம் பெற என்னென்ன அரசு திட்டங்கள் உள்ளன?"
+    },
+    {
+      "en": "How to control pests organically using neem oil?",
+      "ta": "வேப்பெண்ணெய் கொண்டு இயற்கை முறையில் பூச்சிகளை கட்டுப்படுத்துவது எப்படி?"
+    }
+  ],
+  "qa_database": [
+    {
+      "keywords": ["rainfall", "rain", "monsoon", "heavy rain", "water", "மழை", "அதிக மழை", "பயிர்"],
+      "answer_en": "For areas with high rainfall (>150 mm/month) and water-retentive clay soils, **Rice (Paddy)**, **Jute**, **Sugarcane**, and **Banana** are highly recommended. Ensure adequate drainage ditches to prevent root suffocation during torrential downpours.",
+      "answer_ta": "அதிக மழைப்பொழிவு (>150 மி.மீ) மற்றும் களிமண் நிலங்களுக்கு **நெல்**, **சணல்**, **கரும்பு** மற்றும் **வாழை** மிகவும் உகந்தது. வேர் அழுகலைத் தடுக்க முறையான வடிகால் வசதி அமைக்கவும்.",
+      "suggested_actions": ["Check Crop Recommendation", "Review Weather Radar"]
+    },
+    {
+      "keywords": ["yellow", "leaves", "chlorosis", "deficiency", "மஞ்சள்", "இலை", "மஞ்சள் நிறம்"],
+      "answer_en": "Yellowing of older lower leaves typically indicates **Nitrogen (N) deficiency**, while yellowing of young top leaves indicates **Iron (Fe)** or **Sulfur (S)** deficiency. \n\n**Actionable Steps:**\n1. Check for soil waterlogging (which suffocates roots).\n2. Spray foliar 1% Urea or 0.5% Ferrous Sulfate solution.\n3. Verify soil pH (ideal 6.0 - 7.0 for optimal nutrient uptake).",
+      "answer_ta": "கீழ் இலைகள் மஞ்சளாவதற்கு **தழைச்சத்து (Nitrogen) பற்றாக்குறை** காரணமாகும். நுனி இலைகள் மஞ்சளானால் **இரும்புச்சத்து அல்லது கந்தக சத்து** குறைபாடு ஆகும்.\n\n**பரிந்துரை:**\n1. நீர் தேங்குவதை தவிர்க்கவும்.\n2. 1% யூரியா அல்லது 0.5% அன்னபேதி (Ferrous Sulfate) தெளிக்கவும்.\n3. மண்ணின் pH அளவை சோதிக்கவும்.",
+      "suggested_actions": ["Upload leaf in Disease Detection", "Test Soil NPK"]
+    },
+    {
+      "keywords": ["soil", "preparation", "plowing", "tillage", "ph", "மண்", "உழவு", "மண் தயாரிப்பு"],
+      "answer_en": "Proper soil preparation steps:\n1. **Deep Summer Plowing:** Exposes soil pests, weed seeds, and pathogens to solar radiation.\n2. **Organic Manuring:** Incorporate 10-12 tons of well-decomposed Farmyard Manure (FYM) or Vermicompost per hectare.\n3. **Soil Testing:** Test soil pH (apply agricultural lime for acidic soils <6.0 or gypsum for alkaline soils >8.0).\n4. **Fine Tilth:** Rotovate to achieve optimum seedbed aeration and moisture retention.",
+      "answer_ta": "முறையான மண் தயாரிப்பு முறைகள்:\n1. **கோடை உழவு:** பூச்சி முட்டைகள் மற்றும் களை விதைகளை அழிக்க உதவுகிறது.\n2. **இயற்கை உரம்:** ஹெக்டேருக்கு 10 டன் தொழுவுரம் அல்லது மண்புழு உரம் இடவும்.\n3. **மண் பரிசோதனை:** அமில நிலத்திற்கு சுண்ணாம்பு, கார நிலத்திற்கு ஜிப்சம் இடவும்.\n4. **சீரான பாத்திகள்:** விதைப்புக்கு ஏற்றவாறு நிலத்தை சமப்படுத்தவும்.",
+      "suggested_actions": ["Explore Crop Guide", "Calculate Soil NPK"]
+    },
+    {
+      "keywords": ["pest", "organic", "insect", "neem", "பூச்சி", "இயற்கை மருந்து", "பூச்சிக் கட்டுப்பாடு"],
+      "answer_en": "Organic integrated pest management (IPM) guidelines:\n- **Neem Oil Spray (3000 ppm):** Dilute 5 ml/liter of water with 1 ml soap solution for sucking pests (Aphids, Whiteflies, Thrips).\n- **Pheromone Traps:** Install 5-8 yellow sticky cards and pheromone traps per acre.\n- **Bio-agents:** Release *Trichogramma* egg parasitoids (50,000/ha) against leaf folders and borer worms.\n- **Botanical Extract:** 5% Neem seed kernel extract (NSKE) or Agniastra formulation.",
+      "answer_ta": "இயற்கை பூச்சி மேலாண்மை வழிமுறைகள்:\n- **வேப்பெண்ணெய் கரைசல்:** 5 மி.லி/லிட்டர் தண்ணீரில் கலந்து தெளிக்கவும் (சாறு உறிஞ்சும் பூச்சிகளுக்கு).\n- **மஞ்சள் ஒட்டும் பொறி:** ஏக்கருக்கு 5-8 ஒட்டும் பொறிகள் வைக்கவும்.\n- **உயிரியல் கட்டுப்பாடு:** ட்ரைக்கோடெர்மா மற்றும் சூடோமோனாஸ் பயன்படுத்தவும்.\n- **மூலிகை பூச்சி விரட்டி:** அக்னி அஸ்திரம் அல்லது 5% வேப்பங்கொட்டை கரைசல் தெளிக்கவும்.",
+      "suggested_actions": ["Run Disease Scanner", "View Spray Advisory"]
+    },
+    {
+      "keywords": ["scheme", "subsidy", "pmkisan", "loan", "insurance", "திட்டம்", "மானியம்", "கடன்", "காப்பீடு"],
+      "answer_en": "Key agricultural schemes available for you:\n1. **PM-KISAN:** ₹6,000/year direct bank transfer for landholding farmers.\n2. **PMFBY:** Comprehensive crop insurance against droughts, floods, and unseasonal rains.\n3. **PM-KUSUM & TN Micro-Irrigation:** 70% to 100% subsidy for solar pumps and drip irrigation setups.\n4. **Kisan Credit Card (KCC):** 4% concessional interest rate crop loan up to ₹3 Lakhs.",
+      "answer_ta": "முக்கிய விவசாய நலத்திட்டங்கள்:\n1. **PM-KISAN:** ஆண்டுக்கு ₹6,000 நேரடி வங்கி உதவி.\n2. **PMFBY:** பயிர் காப்பீட்டு திட்டம் (குறைந்த பிரீமியம்).\n3. **சொட்டு நீர் பாசன மானியம்:** தமிழகத்தில் சிறு குறு விவசாயிகளுக்கு 100% மானியம்.\n4. **கிசான் கடன் அட்டை (KCC):** 4% குறைந்த வட்டியில் ₹3 லட்சம் வரை பயிர்க்கடன்.",
+      "suggested_actions": ["Browse Government Schemes", "Check Eligibility"]
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+"""
+Government Agricultural Schemes Service
+Provides directory of Central and Tamil Nadu agricultural welfare,
+subsidies, crop insurance, and solar irrigation schemes.
+"""
+
+SCHEMES_DATA = [
+    {
+        "id": "pm_kisan",
+        "name_en": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)",
+        "name_ta": "பிரதம மந்திரி கிசான் சம்மான் நிதி (PM-KISAN)",
+        "category": "Financial Support",
+        "category_ta": "நிதி உதவி",
+        "level": "Central Scheme",
+        "level_ta": "மத்திய அரசு திட்டம்",
+        "benefits_en": "Direct income support of ₹6,000 per year transferred in 3 equal four-monthly installments of ₹2,000 directly into the bank accounts of farmer families.",
+        "benefits_ta": "விவசாய குடும்பங்களுக்கு ஆண்டுதோறும் ₹6,000 மூன்று தவணைகளாக (தலா ₹2,000) நேரடியாக வங்கிக் கணக்கில் வரவு வைக்கப்படுகிறது.",
+        "eligibility_en": "All small and marginal landholding farmer families with cultivable land up to 2 hectares in their name.",
+        "eligibility_ta": "நிலம் வைத்துள்ள அனைத்து சிறு மற்றும் குறு விவசாய குடும்பங்கள்.",
+        "documents_en": "Aadhaar Card, Land Ownership Records (Patta/Chitta), Bank Passbook with IFSC, Mobile number linked to Aadhaar.",
+        "documents_ta": "ஆதார் அட்டை, பட்டா/சிட்டா நில ஆவணம், வங்கி கணக்கு புத்தகம்.",
+        "official_url": "https://pmkisan.gov.in/",
+        "application_mode": "Online & CSC Center"
+    },
+    {
+        "id": "pmfby",
+        "name_en": "PMFBY (Pradhan Mantri Fasal Bima Yojana)",
+        "name_ta": "பிரதம மந்திரி பயிர் காப்பீட்டுத் திட்டம் (PMFBY)",
+        "category": "Crop Insurance",
+        "category_ta": "பயிர் காப்பீடு",
+        "level": "Central & State Joint",
+        "level_ta": "மத்திய மற்றும் மாநில கூட்டு",
+        "benefits_en": "Comprehensive insurance coverage against non-preventable natural risks (drought, flood, pest attack, cyclone) with minimal premium: 2% for Kharif, 1.5% for Rabi, and 5% for commercial/horticultural crops.",
+        "benefits_ta": "இயற்கை பேரிடர்களால் ஏற்படும் பயிர் இழப்புகளுக்கு முழு காப்பீடு. மிகக் குறைந்த பிரீமியம் (காரீப் 2%, ரபி 1.5%).",
+        "eligibility_en": "All farmers including loanee and non-loanee farmers growing notified crops in notified areas.",
+        "eligibility_ta": "அறிவிக்கப்பட்ட பகுதிகளில் அறிவிக்கப்பட்ட பயிர்களை சாகுபடி செய்யும் அனைத்து விவசாயிகள்.",
+        "documents_en": "Sowing Certificate / Adangal from Village Administrative Officer (VAO), Land Patta, Aadhaar, Bank Details.",
+        "documents_ta": "அடங்கல் / விதைப்பு சான்றிதழ், பட்டா, ஆதார், வங்கி விவரங்கள்.",
+        "official_url": "https://pmfby.gov.in/",
+        "application_mode": "Online / Primary Agricultural Cooperative Societies (PACCS)"
+    },
+    {
+        "id": "pm_kusum",
+        "name_en": "PM-KUSUM (Solar Agricultural Pumps Scheme)",
+        "name_ta": "பிஎம்-குசும் (சூரிய சக்தி விவசாய பம்புசெட் திட்டம்)",
+        "category": "Solar & Irrigation",
+        "category_ta": "சூரிய சக்தி & பாசனம்",
+        "level": "Central & State",
+        "level_ta": "மத்திய மற்றும் மாநில அரசு",
+        "benefits_en": "Up to 70% to 90% capital subsidy (Central 30% + State 40% + NABARD loan) for installing standalone off-grid solar agricultural pumps (3HP to 10HP).",
+        "benefits_ta": "சூரிய சக்தி விவசாய பம்புசெட் அமைக்க 70% வரை அரசு மானியம் மற்றும் வங்கி கடன் உதவி.",
+        "eligibility_en": "Individual farmers, Farmer Producer Organizations (FPOs), Cooperatives, Water User Associations with borewell/open well without grid electricity connection.",
+        "eligibility_ta": "மின் இணைப்பு இல்லாத ஆழ்துளை கிணறு அல்லது திறந்தவெளி கிணறு வைத்துள்ள விவசாயிகள்.",
+        "documents_en": "Land Patta, Well certificate from VAO, Electricity Board (TANGEDCO) non-availment certificate, Aadhaar.",
+        "documents_ta": "பட்டா, கிணறு சான்றிதழ், மின்சார வாரிய தடையில்லா சான்று, ஆதார்.",
+        "official_url": "https://pmkusum.mnre.gov.in/",
+        "application_mode": "Agricultural Engineering Dept / TEDA Portal"
+    },
+    {
+        "id": "kcc",
+        "name_en": "Kisan Credit Card (KCC) & Interest Subvention",
+        "name_ta": "கிசான் கடன் அட்டை (KCC) திட்டம்",
+        "category": "Financial Support",
+        "category_ta": "நிதி உதவி",
+        "level": "National",
+        "level_ta": "தேசிய திட்டம்",
+        "benefits_en": "Short-term crop production loan up to ₹3 Lakhs at an effective concessional interest rate of only 4% per annum upon prompt repayment (7% base - 3% prompt subvention). Collateral-free up to ₹1.60 Lakhs.",
+        "benefits_ta": "₹3 லட்சம் வரை 4% குறைந்த வட்டியில் குறுகிய கால பயிர்க்கடன். ₹1.60 லட்சம் வரை பிணையம் இல்லா கடன்.",
+        "eligibility_en": "Owner cultivators, tenant farmers, oral lessees, sharecroppers, and self-help groups (SHGs) of farmers.",
+        "eligibility_ta": "சொந்த நிலத்தில் சாகுபடி செய்வோர், குத்தகை விவசாயிகள் மற்றும் உழவர் குழுக்கள்.",
+        "documents_en": "Land documents, Crop cultivation proof, Aadhaar, PAN Card, Passport size photograph.",
+        "documents_ta": "நில ஆவணங்கள், பயிர் சாகுபடி விவரம், ஆதார் மற்றும் பான் அட்டை.",
+        "official_url": "https://agricoop.nic.in/",
+        "application_mode": "Nationalized Banks / Cooperative Banks / Post Office"
+    },
+    {
+        "id": "tn_drip_subsidy",
+        "name_en": "Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) - Micro Irrigation / TN Drip Subsidy",
+        "name_ta": "நுண்ணீர்ப் பாசனத் திட்டம் (சொட்டு நீர் பாசன மானியம்)",
+        "category": "Solar & Irrigation",
+        "category_ta": "சூரிய சக்தி & பாசனம்",
+        "level": "Tamil Nadu State Special",
+        "level_ta": "தமிழ்நாடு மாநில சிறப்பு திட்டம்",
+        "benefits_en": "100% full subsidy for Small and Marginal farmers (up to 5 acres) and 75% subsidy for other farmers in Tamil Nadu for installing Drip & Sprinkler irrigation systems.",
+        "benefits_ta": "சிறு, குறு விவசாயிகளுக்கு 100% முழு மானியம், இதர விவசாயிகளுக்கு 75% மானியத்தில் சொட்டு நீர் பாசன கருவிகள்.",
+        "eligibility_en": "Farmers possessing valid water source and cultivable land in Tamil Nadu.",
+        "eligibility_ta": "தமிழ்நாட்டில் பாசன வசதியுடன் நிலம் வைத்துள்ள விவசாயிகள்.",
+        "documents_en": "Chitta/Patta, Field Map (FMB sketch), VAO Certificate, Soil & Water test report, Aadhaar, Bank Details.",
+        "documents_ta": "சிட்டா/பட்டா, வரைபடம் (FMB), VAO சான்றிதழ், மண்-நீர் பரிசோதனை அறிக்கை.",
+        "official_url": "https://www.tnhorticulture.tn.gov.in/",
+        "application_mode": "TNHorticulture Portal / Assistant Director of Horticulture Office"
+    },
+    {
+        "id": "smam_machinery",
+        "name_en": "Sub-Mission on Agricultural Mechanization (SMAM)",
+        "name_ta": "வேளாண் இயந்திரமயமாக்கல் திட்டம் (SMAM)",
+        "category": "Subsidies & Equipment",
+        "category_ta": "மானியம் & இயந்திரங்கள்",
+        "level": "Central & State",
+        "level_ta": "மத்திய மற்றும் மாநில அரசு",
+        "benefits_en": "40% to 50% subsidy on procurement of Tractors, Power Tillers, Paddy Transplanters, Combine Harvesters, Multi-crop threshers, and drone sprayers.",
+        "benefits_ta": "டிராக்டர், பவர் டில்லர், நெல் நடவு இயந்திரம் மற்றும் ட்ரோன் வாங்க 40% முதல் 50% வரை மானியம்.",
+        "eligibility_en": "Individual farmers, Registered Farmer Producer Companies (FPCs), and Custom Hiring Centers (CHCs).",
+        "eligibility_ta": "தனிநபர் விவசாயிகள் மற்றும் உழவர் உற்பத்தியாளர் நிறுவனங்கள்.",
+        "documents_en": "Quotation from authorized dealer, Patta, Aadhaar, Bank account details, Driving License for tractors.",
+        "documents_ta": "அங்கீகரிக்கப்பட்ட டீலர் விலைப்புள்ளி (Quotation), பட்டா, ஆதார், வங்கி விவரங்கள்.",
+        "official_url": "https://agrimachinery.nic.in/",
+        "application_mode": "Agrimachinery Portal / District AED Office"
+    },
+    {
+        "id": "paramparagat_krishi",
+        "name_en": "Paramparagat Krishi Vikas Yojana (PKVY) - Organic Farming",
+        "name_ta": "பாரம்பரிய வேளாண் வளர்ச்சித் திட்டம் (PKVY - இயற்கை விவசாயம்)",
+        "category": "Organic Farming",
+        "category_ta": "இயற்கை விவசாயம்",
+        "level": "Central Scheme",
+        "level_ta": "மத்திய அரசு திட்டம்",
+        "benefits_en": "Financial assistance of ₹50,000 per hectare for 3 years (₹31,000 directly to farmers for organic inputs like vermicompost, bio-fertilizers, and botanical extracts + ₹19,000 for PGS certification & packaging).",
+        "benefits_ta": "இயற்கை விவசாயம் செய்ய ஒரு ஹெக்டேருக்கு 3 ஆண்டுகளுக்கு ₹50,000 நிதி உதவி (உரங்கள் மற்றும் சான்றிதழ் கட்டணம்).",
+        "eligibility_en": "Cluster of farmers (minimum 20-50 farmers forming 20-50 hectares) adopting PGS organic certification.",
+        "eligibility_ta": "குழுவாக இணைந்து இயற்கை விவசாய சான்றிதழ் பெற விரும்பும் உழவர்கள்.",
+        "documents_en": "Farmer group formation resolution, Individual Aadhaar & Patta, Bank account details.",
+        "documents_ta": "குழு ஆவணங்கள், ஆதார் மற்றும் நில ஆவணங்கள்.",
+        "official_url": "https://pgsindia-ncof.gov.in/",
+        "application_mode": "District Agriculture Department"
+    }
+]
+
+class SchemeService:
+    def get_schemes(self, search="", category="All"):
+        search_lower = search.strip().lower()
+        results = []
+        
+        for item in SCHEMES_DATA:
+            # Match category
+            if category and category != "All" and item["category"] != category:
+                continue
+                
+            # Match search text across name, description, benefits, eligibility in English and Tamil
+            if search_lower:
+                text_corpus = (
+                    f"{item['name_en']} {item['name_ta']} {item['category']} {item['category_ta']} "
+                    f"{item['benefits_en']} {item['benefits_ta']} {item['eligibility_en']} {item['eligibility_ta']}"
+                ).lower()
+                if search_lower not in text_corpus:
+                    continue
+                    
+            results.append(item)
+            
+        return {
+            "success": True,
+            "count": len(results),
+            "schemes": results,
+            "categories": ["All", "Financial Support", "Crop Insurance", "Solar & Irrigation", "Subsidies & Equipment", "Organic Farming"]
+        }
