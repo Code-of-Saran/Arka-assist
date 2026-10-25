@@ -8,7 +8,7 @@ frontend_dir = os.path.dirname(os.path.abspath(__file__))
 pkg_json_src = os.path.join(frontend_dir, "package.json")
 
 # Create local fast build directory outside OneDrive
-cache_build_dir = os.path.join(os.environ.get("LOCALAPPDATA", tempfile.gettempdir()), "AgriVision_Build")
+cache_build_dir = os.path.join(os.environ.get("LOCALAPPDATA", tempfile.gettempdir()), "ArkaAssist_Build")
 os.makedirs(cache_build_dir, exist_ok=True)
 print(f"[FastInstall] Using local workspace cache: {cache_build_dir}")
 

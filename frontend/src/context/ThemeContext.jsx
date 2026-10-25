@@ -4,7 +4,11 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('agrivision_theme') || 'light';
+    const legacy = localStorage.getItem('agrivision_theme');
+    if (legacy) {
+      localStorage.removeItem('agrivision_theme');
+    }
+    return localStorage.getItem('arka_assist_theme') || legacy || 'light';
   });
 
   useEffect(() => {
@@ -14,7 +18,8 @@ export const ThemeProvider = ({ children }) => {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('agrivision_theme', theme);
+    localStorage.setItem('arka_assist_theme', theme);
+    localStorage.removeItem('agrivision_theme');
   }, [theme]);
 
   const toggleTheme = () => {

@@ -1,6 +1,6 @@
 {
-  "short_name": "AgriVision",
-  "name": "AGRI VISION - AI-Powered Smart Agriculture Decision Support System",
+  "short_name": "Arka-assist",
+  "name": "Arka-assist — Multimodal AI Farm Intelligence and Decision Support System",
   "icons": [
     {
       "src": "/leaf.svg",
@@ -13,5 +13,5 @@
   "theme_color": "#165B33",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "description": "Smart Decisions. Better Farming. AI-powered decision support for farmers with full offline capability."
+  "description": "Smart Decisions. Better Farming. Multimodal AI-based farm intelligence and decision support system for farmers."
 }

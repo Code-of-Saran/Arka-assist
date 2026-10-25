@@ -1,0 +1,74 @@
+{
+  "accuracy": 0.18,
+  "macro_precision": 0.1274,
+  "macro_recall": 0.18,
+  "macro_f1": 0.1244,
+  "weighted_f1": 0.1244,
+  "total_test_samples": 50,
+  "classes_evaluated": 10,
+  "per_class_metrics": {
+    "bacterial_leaf_blight": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    },
+    "bacterial_leaf_streak": {
+      "precision": 0.0667,
+      "recall": 0.4,
+      "f1_score": 0.1143,
+      "support": 5
+    },
+    "bacterial_panicle_blight": {
+      "precision": 0.5,
+      "recall": 0.2,
+      "f1_score": 0.2857,
+      "support": 5
+    },
+    "blast": {
+      "precision": 0.3077,
+      "recall": 0.8,
+      "f1_score": 0.4444,
+      "support": 5
+    },
+    "brown_spot": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    },
+    "dead_heart": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    },
+    "downy_mildew": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    },
+    "hispa": {
+      "precision": 0.4,
+      "recall": 0.4,
+      "f1_score": 0.4,
+      "support": 5
+    },
+    "normal": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    },
+    "tungro": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 5
+    }
+  },
+  "is_sample_run": true,
+  "model_architecture": "mobilenet_v3_small",
+  "evaluation_timestamp": "2026-09-20T14:52:08"
+}

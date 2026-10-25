@@ -1,0 +1,25 @@
+{
+  "model_architecture": "MobileNetV3-Small",
+  "dataset": "Paddy Doctor (Kaggle/GitHub Benchmark)",
+  "num_classes": 10,
+  "classes": [
+    "bacterial_leaf_blight",
+    "bacterial_leaf_streak",
+    "bacterial_panicle_blight",
+    "blast",
+    "brown_spot",
+    "dead_heart",
+    "downy_mildew",
+    "hispa",
+    "normal",
+    "tungro"
+  ],
+  "epochs": 6,
+  "batch_size": 8,
+  "initial_learning_rate": 0.001,
+  "device": "cpu",
+  "random_seed": 42,
+  "training_time_seconds": 11.9,
+  "is_sample_run": true,
+  "sample_notice": "Trained on benchmark verification samples because full multi-gigabyte dataset was not pre-placed locally."
+}

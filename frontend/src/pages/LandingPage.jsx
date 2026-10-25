@@ -5,19 +5,24 @@ import { useAuth } from '../context/AuthContext';
 import {
   Sprout,
   Bug,
+  Flame,
+  Layers,
+  CalendarCheck,
+  Store,
+  Scale,
   CloudSun,
   BookOpenCheck,
   Bot,
-  WifiOff,
-  ShieldCheck,
+  Mic,
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  Layers,
-  ChevronRight,
   TrendingUp,
   Cpu,
-  Globe2
+  Compass,
+  ChevronRight,
+  ShieldCheck,
+  Box
 } from 'lucide-react';
 
 const LandingPage = () => {
@@ -25,226 +30,287 @@ const LandingPage = () => {
   const { isAuthenticated } = useAuth();
   const isTamil = language === 'ta';
 
-  const capabilities = [
+  const lifecycleStages = [
+    { num: '01', step: 'PLAN', title: isTamil ? 'மண் & பயிர் திட்டம்' : 'Soil & Crop Matcher', desc: isTamil ? 'N-P-K & மழைப்பொழிவு ஆய்வு' : 'N-P-K & rainfall suitability', icon: Sprout },
+    { num: '02', step: 'GROW', title: isTamil ? 'வானிலை & ஊட்டச்சத்து' : 'Agro-Meteorology', desc: isTamil ? 'தெளிப்பு நேரம் & ஈரப்பதம்' : 'Spray timing & moisture alerts', icon: CloudSun },
+    { num: '03', step: 'MONITOR', title: isTamil ? 'இலை நோய் ஸ்கேனர்' : 'Foliar Vision AI', desc: isTamil ? 'AI இலை நோய் கண்டறிதல்' : 'MobileNetV3 leaf pathology', icon: Bug },
+    { num: '04', step: 'ANALYZE', title: isTamil ? 'அகச்சிவப்பு வெப்பம்' : 'Canopy Thermography', desc: isTamil ? 'வேர் நீர் பற்றாக்குறை' : 'Root water stress heatmap', icon: Flame },
+    { num: '05', step: 'DECIDE', title: isTamil ? '24h பண்ணை வழிகாட்டி' : '24h Action Command', desc: isTamil ? 'P1, P2, P3 முன்னுரிமைகள்' : 'P1, P2, P3 priority daily actions', icon: CalendarCheck },
+    { num: '06', step: 'SELL', title: isTamil ? 'மண்டி விற்பனை முடிவு' : 'Market Sell / Wait', desc: isTamil ? 'அதிக லாப விற்பனை நேரம்' : 'Explainable holding profit engine', icon: Scale }
+  ];
+
+  const features = [
     {
-      icon: Sprout,
-      title: isTamil ? 'பயிர் பரிந்துரை' : 'Crop Recommendation',
-      desc: isTamil ? 'மண் சத்துக்கள் (NPK), காரத்தன்மை மற்றும் வானிலை அளவுகளை ஆய்வு செய்து உகந்த பயிரை பரிந்துரைக்கும்.' : 'Machine-learned agronomic modeling matching soil NPK, pH, and precipitation to highest yield crop.',
+      id: 'crop',
+      tag: 'EDGE AI AGRONOMY',
+      title: isTamil ? 'துல்லியமான பயிர் பொருத்தம் & மண் பகுப்பாய்வு' : 'Precision Crop Recommendation Engine',
+      desc: isTamil
+        ? 'மண்ணின் தழைச்சத்து (N), மணிச்சத்து (P), சாம்பல்சத்து (K), pH மற்றும் வானிலை காரணிகளை பகுப்பாய்வு செய்து அதிக மகசூல் தரும் பயிரை பரிந்துரைக்கும்.'
+        : 'RandomForest ML model analyzing 7 vital agro-climatic parameters. Calibrated specifically for Tamil Nadu agro-ecological zones with explainable factor confidence scores.',
+      highlights: [
+        isTamil ? 'தமிழ்நாடு வேளாண் மண்டல அளவீடுகள்' : 'Multi-parameter soil nutrient matching',
+        isTamil ? 'மண் ஊட்டச்சத்து சமநிலை வழிகாட்டல்' : 'Detailed soil nutrient deficiency matrix',
+        isTamil ? '100% ஆஃப்லைன் கணக்கீட்டு திறன்' : '100% offline edge inference capability'
+      ],
       link: '/crop-recommendation',
-      tag: 'ML Model'
+      linkText: isTamil ? 'பயிர் பரிந்துரை தொடங்க' : 'Run Crop Planning Engine',
+      image: '/assets/images/soil-sprout.jpg',
+      reverse: false
     },
     {
-      icon: Cpu,
-      title: isTamil ? 'வெப்ப பட & பல்நோக்கு ஆய்வு' : 'Thermal & Multimodal Vision',
-      desc: isTamil ? 'இலை நிறப்படம் மற்றும் அகச்சிவப்பு வெப்பநிலையை ஒருங்கிணைத்து துல்லிய பயிர் அழுத்த கண்டறிதல்.' : 'Fused RGB pathology and thermal infrared thermography for root-zone moisture & transpiration deficit.',
-      link: '/multimodal',
-      tag: 'Multimodal AI'
+      id: 'disease',
+      tag: 'COMPUTER VISION AI',
+      title: isTamil ? 'இலை நோய் கண்டறிதல் & உயிரியல் சிகிச்சை' : 'Foliar Pathology & Organic Remedy AI',
+      desc: isTamil
+        ? 'பயிர் இலைகளின் புகைப்படத்தை ஆய்வு செய்து நோய் அறிகுறிகள், பூச்சி தாக்குதல்கள் மற்றும் ஊட்டச்சத்து குறைபாடுகளை நொடிகளில் கண்டறியும்.'
+        : 'Instant multi-class crop disease classification using neural computer vision. Provides organic biological preparations and ICAR-verified chemical dosage timings.',
+      highlights: [
+        isTamil ? 'PyTorch பார்வை மாதிரி பகுப்பாய்வு' : 'PyTorch MobileNetV3 visual classification',
+        isTamil ? 'இயற்கை மூலிகை மற்றும் உயிரியல் மருந்துகள்' : 'Biological Panchagavya / Neem formulations',
+        isTamil ? 'தெளிவான சிகிச்சை கால அட்டவணை' : 'Actionable spray timing & weather validation'
+      ],
+      link: '/disease-detection',
+      linkText: isTamil ? 'இலை ஸ்கேன் செய்க' : 'Launch Leaf Diagnostic Tool',
+      image: '/assets/images/leaf-close-up.jpg',
+      reverse: true
     },
     {
-      icon: TrendingUp,
-      title: isTamil ? 'சந்தை & விற்பனை முடிவு' : 'Market & Sell/Wait Engine',
-      desc: isTamil ? 'மண்டி விலைகள், 7 நாள் விலை போக்கு மற்றும் AI விற்பனை / காத்திருப்பு வழிகாட்டுதல்.' : 'Authentic mandi prices, 7-day momentum tracking, and explainable AI Sell vs. Wait harvest guidance.',
-      link: '/market',
-      tag: 'Econometric AI'
+      id: 'thermal',
+      tag: 'MULTIMODAL THERMOGRAPHY',
+      title: isTamil ? 'அகச்சிவப்பு வெப்ப பட பயிர் அழுத்தம்' : 'Thermal Infrared Canopy Diagnostics',
+      desc: isTamil
+        ? 'பயிர் இலைகளின் வெப்பநிலையை அகச்சிவப்பு வரைபடம் மூலம் ஆய்வு செய்து, வேர் பகுதி நீர் பற்றாக்குறை மற்றும் வாடல் நோயை முன்கூட்டியே எச்சரிக்கும்.'
+        : 'Non-invasive spatial thermography mapping canopy temperature anomalies. Detects early stomatal closure, transpiration failure, and root-zone water deficit.',
+      highlights: [
+        isTamil ? '8×8 நிலப்பரப்பு வெப்ப வரைபடம்' : 'Interactive 8×8 false-color spatial colormap',
+        isTamil ? 'கனோபி வெப்பநிலை வேறுபாடு (ΔT)' : 'Canopy-to-air differential (ΔT) tracking',
+        isTamil ? 'வாடல் நோய் முன்கூட்டியே அறிதல்' : 'Vascular wilt and salinity stress detection'
+      ],
+      link: '/thermal',
+      linkText: isTamil ? 'வெப்ப பகுப்பாய்வு செய்க' : 'Inspect Canopy Thermography',
+      image: '/assets/images/crop-fields.jpg',
+      reverse: false
     },
     {
-      icon: Layers,
-      title: isTamil ? '3D டிஜிட்டல் பண்ணை' : '3D Farm Digital Twin',
-      desc: isTamil ? 'உங்கள் நிலப்பகுதிகளின் நேரடி வெப்பநிலை, மண் ஈரப்பதம் மற்றும் பயிர் நிலையை 3D-ல் காட்டும்.' : 'Interactive 3D representation of farm parcels with live canopy temperatures and sensor telemetry.',
+      id: 'farm-3d',
+      tag: 'SPATIAL DIGITAL TWIN',
+      title: isTamil ? '3D டிஜிட்டல் இரட்டை பண்ணை மாதிரி' : '3D Farm Digital Twin Model',
+      desc: isTamil
+        ? 'உங்கள் 4.5 ஏக்கர் பண்ணை நிலப்பகுதிகளின் நேரடி 3D மாதிரி. கனோபி வெப்பநிலை மற்றும் ஈரப்பத வரைபடங்களுடன் நிகழ்நேரத்தில் இணைக்கப்பட்டுள்ளது.'
+        : 'Spatial isometric digital twin visualizing parcel vitality, canopy thermal hotspots, and soil moisture sensors with immediate field action plans.',
+      highlights: [
+        isTamil ? '4 நிலப்பகுதிகள் நேரடி பார்வை' : '4-parcel interactive isometric perspective',
+        isTamil ? 'கனோபி வெப்பநிலை மற்றும் மண் ஈரப்பதம்' : 'Canopy thermal & root-zone volumetric telemetry',
+        isTamil ? 'நிலப்பகுதி வாரியான உடனடி செயல் திட்டம்' : 'Parcel-specific agronomic irrigation schedules'
+      ],
       link: '/farm-3d',
-      tag: 'Digital Twin'
+      linkText: isTamil ? '3D மாதிரி பார்க்க' : 'Open 3D Farm Digital Twin',
+      image: '/assets/images/drone-canopy.jpg',
+      reverse: true
     },
     {
-      icon: CloudSun,
-      title: isTamil ? 'விவசாய வானிலை' : 'Agro-Meteorology',
-      desc: isTamil ? 'வானிலை முன்னறிவிப்புடன் பாசனம், மருந்து தெளிப்பு மற்றும் மழைக்கான விவசாய எச்சரிக்கைகள்.' : 'Localized weather tracking paired with real-time irrigation advice, spray windows, and flood hazards.',
-      link: '/weather',
-      tag: 'Advisory'
-    },
-    {
-      icon: Bot,
-      title: isTamil ? 'குரல் வழி AI விவசாய உதவியாளர்' : 'AI Voice Farm Assistant',
-      desc: isTamil ? 'குரல் மூலம் பேசி பயிர் ஆலோசனை, சந்தை விலை மற்றும் பண்ணை முடிவுகளை உடனே அறியலாம்.' : 'Hands-free conversational speech companion with English & Tamil speech recognition and audio readout.',
-      link: '/assistant',
-      tag: 'Voice AI'
+      id: 'market',
+      tag: 'ECONOMETRIC ENGINE',
+      title: isTamil ? 'மண்டி விலை போக்கு & விற்பனை/காத்திருப்பு வழிகாட்டி' : 'Mandi Market & Explainable Sell/Wait Advisor',
+      desc: isTamil
+        ? 'உண்மையான மண்டி விலைகள் மற்றும் 7 நாள் விலை வேகத்தை ஆய்வு செய்து, விளைபொருளை உடனே விற்க வேண்டுமா அல்லது காத்திருக்க வேண்டுமா என வழிகாட்டும்.'
+        : 'Economic decision matrix evaluating real mandi price momentum against storage holding costs and spoilage risks to calculate optimal harvest timing.',
+      highlights: [
+        isTamil ? 'அரசு Agmarknet மண்டி விலை குறியீடு' : 'Agmarknet wholesale mandi price indices',
+        isTamil ? 'காத்திருப்பு பலன் vs சேமிப்பு செலவு' : 'Net holding gain vs. weekly storage cost',
+        isTamil ? 'நேரடி கொள்முதல் வாங்குவோர் இணைப்பு' : 'Direct compatibility scoring with wholesale buyers'
+      ],
+      link: '/sell-decision',
+      linkText: isTamil ? 'விற்பனை முடிவை கணக்கிடுக' : 'Calculate Sell vs. Wait Timing',
+      image: '/assets/images/harvest-mandi.jpg',
+      reverse: false
     }
   ];
 
-  const workflowSteps = [
-    { num: '01', title: isTamil ? 'மண் & தட்பவெப்ப உள்ளீடு' : 'Soil & Climate Input', desc: isTamil ? 'நிலத்தின் NPK சத்துக்கள், pH அளவு மற்றும் மழைப்பொழிவு' : 'NPK soil chemistry, pH, moisture & precipitation inputs' },
-    { num: '02', title: isTamil ? 'AI மாதிரி பகுப்பாய்வு' : 'AI/ML Processing', desc: isTamil ? 'ரேண்டம் பாரஸ்ட் மற்றும் கணினி பார்வை மாதிரிகள்' : 'Trained Random Forest classifier & visual pathology engines' },
-    { num: '03', title: isTamil ? 'இரட்டை அறிக்கை வெளியீடு' : 'Dual Output Matrix', desc: isTamil ? 'விளக்க உரை + வரைபட ஒப்பீட்டு விளக்கங்கள்' : 'Agronomic textual guide + interactive visual diagrammatic charts' },
-    { num: '04', title: isTamil ? 'விவசாய நடவடிக்கை' : 'Field Implementation', desc: isTamil ? 'துல்லிய பாசனம், உரம் மற்றும் நோய் மேலாண்மை' : 'Targeted fertigation, timely spray windows, and subsidy adoption' }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen text-white selection:bg-[#0B6623] selection:text-white">
       
-      {/* 1. HERO SECTION WITH FULL-WIDTH AGRICULTURAL BACKGROUND */}
-      <section className="relative overflow-hidden min-h-[85vh] lg:min-h-[90vh] flex items-center pt-16 pb-24 lg:pt-20 lg:pb-28">
+      {/* ========================================================
+          1. HERO SECTION (SCREENSHOT 4 EXACT STRUCTURE)
+          ======================================================== */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-10 pb-16 lg:pt-14 lg:pb-20">
         
-        {/* AGRICULTURAL BACKGROUND IMAGE WITH COVER & SLOW SUBTLE ZOOM */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Full-width Background Image with Layered Gradient */}
+        <div className="absolute inset-0 z-0">
           <img
-            src="/assets/images/hero-farm-bg.jpg"
-            alt="Arka-assist Smart Agricultural Farm Field"
-            className="w-full h-full object-cover object-center transform scale-105 animate-hero-bg-zoom filter brightness-[0.92] contrast-[1.05]"
+            src="/assets/images/hero-aerial-farm.jpg"
+            alt="Indian Farmland at Sunrise"
+            className="w-full h-full object-cover object-center transform scale-105 filter brightness-[0.45] contrast-[1.15]"
           />
-          {/* Subtle dark earth-tone gradient overlay (35-50%) for guaranteed text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-forest-950/92 via-forest-950/80 to-forest-950/50 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-transparent to-forest-950/40 z-10" />
-          {/* Subtle warm glow accents */}
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[300px] bg-amber-500/10 blur-[120px] pointer-events-none z-10" />
-          <div className="absolute bottom-10 right-1/4 w-[450px] h-[250px] bg-leaf-500/15 blur-[100px] pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F3D25]/95 via-[#0B6623]/75 to-[#0F3D25]/60 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a11] via-transparent to-black/35 z-10 pointer-events-none" />
         </div>
-        
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+        {/* Hero Content Container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             
             {/* Left Hero Content */}
             <div className="lg:col-span-7 text-center lg:text-left space-y-6 animate-fade-in-up">
               
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-900/80 border border-leaf-500/40 text-leaf-300 text-xs font-bold shadow-lg backdrop-blur-md">
-                <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>{isTamil ? 'அடுத்த தலைமுறை ஸ்மார்ட் விவசாய தளம்' : 'Next-Gen Agricultural Intelligence Platform'}</span>
+              {/* Product Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/12 border border-white/22 text-white text-xs font-bold shadow-glass backdrop-blur-md">
+                <Sprout className="w-4 h-4 text-[#5BA33C]" />
+                <span className="tracking-wide">Next-Gen Agricultural Intelligence Platform</span>
               </div>
 
-              {/* ARKA-ASSIST Brand Title */}
+              {/* Main Heading & Subtitle */}
               <div className="space-y-2">
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white drop-shadow-md leading-[1.08]">
-                  ARKA-ASSIST
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] drop-shadow-md font-mono">
+                  ARKA—ASSIST
                 </h1>
-                <p className="text-xl sm:text-2xl font-extrabold text-leaf-300 tracking-wide">
-                  {t('hero_brand_subtitle')}
+                <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#5BA33C] tracking-tight">
+                  Your Intelligent Farming Companion
+                </p>
+                <p className="text-sm sm:text-base text-white/90 max-w-2xl leading-relaxed font-medium pt-1">
+                  Plan, monitor, analyze and make smarter farming decisions with AI.
                 </p>
               </div>
 
-              {/* Tagline / Supporting text */}
-              <p className="text-base sm:text-lg text-cream-100/90 max-w-2xl leading-relaxed font-medium drop-shadow">
-                {t('hero_brand_tagline')}
-              </p>
-
-              {/* Highlights Chips */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1 text-xs font-bold text-cream-100">
-                <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-leaf-400" />
-                  {isTamil ? 'தமிழ் & English' : 'English & Tamil Dual UI'}
+              {/* Feature Chips */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1 text-xs font-semibold text-white">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/18">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#5BA33C]" />
+                  <span>English & Tamil Dual UI</span>
                 </span>
-                <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-leaf-400" />
-                  {isTamil ? '100% ஆஃப்லைன் முறை' : '100% Offline Capable'}
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/18">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#5BA33C]" />
+                  <span>100% Offline Capable</span>
                 </span>
-                <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-leaf-400" />
-                  {isTamil ? 'உரை + வரைபட வெளியீடு' : 'Multimodal RGB + Thermal AI'}
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/18">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#5BA33C]" />
+                  <span>Multimodal RGB + Thermal AI</span>
                 </span>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3">
+              {/* CTA Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-3">
                 <Link
                   to={isAuthenticated ? "/dashboard" : "/login"}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-white bg-gradient-to-r from-forest-600 via-forest-500 to-leaf-600 hover:from-forest-500 hover:to-leaf-500 border border-leaf-400/40 shadow-xl hover:shadow-glow-green transform hover:-translate-y-0.5 transition-all duration-200 text-sm group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold text-white btn-glass-primary shadow-glass transition-all text-sm group cursor-pointer"
                 >
-                  <Sprout className="w-5 h-5 text-leaf-200 group-hover:rotate-12 transition-transform" />
-                  <span>{t('hero_cta_analyze')}</span>
+                  <Sprout className="w-4 h-4 text-white" />
+                  <span>Analyze My Farm</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <Link
                   to="/assistant"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl font-bold text-amber-200 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 backdrop-blur-md shadow-lg transform hover:-translate-y-0.5 transition-all text-sm group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-white bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/35 backdrop-blur-md transition-all text-sm cursor-pointer shadow-glass"
                 >
-                  <Bot className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
-                  <span>{t('hero_cta_talk')}</span>
+                  <Bot className="w-4 h-4 text-amber-300" />
+                  <span>Talk to Arka-assist</span>
                 </Link>
               </div>
 
             </div>
 
-            {/* Right Hero Visual Depth Floating Glass Cards */}
-            <div className="lg:col-span-5 relative space-y-4">
-              
-              {/* Main Floating Farm Health & AI Telemetry Card */}
-              <div className="hero-glass-card rounded-3xl p-6 shadow-2xl text-white backdrop-blur-xl border border-white/20 relative overflow-hidden group hover:border-leaf-400/50 transition-all">
-                {/* Top glow accent */}
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-leaf-500/20 blur-2xl rounded-full pointer-events-none" />
+            {/* Right Side: Floating Glass Telemetry Card (SCREENSHOT 4) */}
+            <div className="lg:col-span-5 relative pt-4 lg:pt-0">
+              <div className="glass-dark p-6 rounded-3xl border border-white/18 shadow-2xl backdrop-blur-2xl space-y-4">
                 
-                {/* Header status bar */}
-                <div className="flex items-center justify-between pb-4 border-b border-white/15 mb-5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span className="text-xs font-mono text-leaf-300 font-semibold tracking-wider">FARM_TELEMETRY.AI</span>
-                  </div>
-                  <span className="px-3 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-leaf-500/20 text-leaf-300 border border-leaf-400/30">
-                    Live Farm Monitor
+                {/* Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-white/12">
+                  <span className="text-xs font-mono font-black text-[#5BA33C] tracking-wider">
+                    FARM_TELEMETRY.AI
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#0B6623]/40 text-[#5BA33C] border border-[#5BA33C]/40">
+                    LIVE FARM MONITOR
                   </span>
                 </div>
 
-                {/* Farm Health Gauge Card */}
-                <div className="mb-5 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-cream-200/80 font-medium uppercase tracking-wider">Overall Farm Health</div>
-                    <div className="text-2xl font-black text-white flex items-center gap-2 mt-0.5">
-                      <span>82 / 100</span>
-                      <span className="text-xs px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 border border-emerald-400/30 font-semibold">Healthy 🌱</span>
+                {/* Section 1: OVERALL FARM HEALTH */}
+                <div className="flex items-center justify-between py-1">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#D8C7AE] block">
+                      OVERALL FARM HEALTH
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight">
+                        82 / 100
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#0B6623]/40 text-[#5BA33C] border border-[#5BA33C]/40 flex items-center gap-1">
+                        <span>Healthy</span>
+                        <span>🌱</span>
+                      </span>
                     </div>
                   </div>
-                  {/* Progress Arc / Circle */}
-                  <div className="w-12 h-12 rounded-full border-4 border-emerald-500/30 border-t-emerald-400 flex items-center justify-center font-bold text-xs text-emerald-300">
+
+                  <div className="w-14 h-14 rounded-full border-4 border-[#5BA33C]/30 border-t-[#5BA33C] flex items-center justify-center font-black text-sm text-[#5BA33C] font-mono bg-black/30">
                     82%
                   </div>
                 </div>
 
-                {/* Simulated decision widgets */}
-                <div className="space-y-3">
-                  {/* Top crop recommendation */}
-                  <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 backdrop-blur-sm flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-forest-700/80 border border-leaf-500/30 flex items-center justify-center text-leaf-300 text-lg font-bold shadow-inner">
-                        🌾
-                      </div>
-                      <div>
-                        <div className="text-[11px] text-cream-200/70 uppercase font-semibold">Recommended Crop</div>
-                        <div className="text-sm font-bold text-white">Rice (Paddy) / நெல்</div>
-                      </div>
+                {/* Section 2: RECOMMENDED CROP */}
+                <div className="p-3.5 rounded-2xl bg-white/6 border border-white/12 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#0B6623] flex items-center justify-center text-white shrink-0 shadow-glass">
+                      <Sprout className="w-5 h-5" />
                     </div>
-                    <div className="text-right">
-                      <span className="text-lg font-black text-leaf-400">98.3%</span>
-                      <span className="block text-[9px] text-cream-200/60 font-mono">Confidence</span>
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-[#D8C7AE] block tracking-wider">
+                        RECOMMENDED CROP
+                      </span>
+                      <span className="text-sm font-black text-white block">
+                        Rice (Paddy) / நெல்
+                      </span>
                     </div>
                   </div>
-
-                  {/* Weather & Leaf Scanner Grid */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                      <div className="flex items-center gap-1.5 text-xs text-amber-300 font-semibold mb-1">
-                        <CloudSun className="w-3.5 h-3.5" />
-                        <span>Agro-Weather</span>
-                      </div>
-                      <div className="text-xs font-bold text-white">28.5°C | Optimal</div>
-                      <div className="text-[10px] text-leaf-300 mt-0.5 font-medium">● Spray Window Open</div>
-                    </div>
-
-                    <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                      <div className="flex items-center gap-1.5 text-xs text-rose-300 font-semibold mb-1">
-                        <Bug className="w-3.5 h-3.5" />
-                        <span>Pathology AI</span>
-                      </div>
-                      <div className="text-xs font-bold text-white">Leaf Scanner</div>
-                      <div className="text-[10px] text-amber-300 mt-0.5 font-medium">● 0-Risk Early Catch</div>
-                    </div>
-                  </div>
-
-                  {/* Zero-latency offline pill */}
-                  <div className="p-2.5 rounded-xl bg-forest-900/60 border border-leaf-500/30 flex items-center justify-between text-xs text-cream-200">
-                    <span className="flex items-center gap-1.5 text-[11px] font-medium">
-                      <ShieldCheck className="w-4 h-4 text-leaf-400" />
-                      <span>Zero-Latency Offline Mode</span>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-[#5BA33C] font-mono block">
+                      98.3%
                     </span>
-                    <span className="font-mono text-leaf-300 font-bold text-[10px]">100% READY</span>
+                    <span className="text-[9px] text-[#D8C7AE] uppercase tracking-wider block">
+                      Confidence
+                    </span>
                   </div>
+                </div>
+
+                {/* Section 3: Two Mini Telemetry Boxes Side-by-Side */}
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  {/* Box 1: Agro-Weather */}
+                  <div className="p-3 rounded-2xl bg-white/6 border border-white/12 space-y-1">
+                    <div className="flex items-center gap-1.5 text-amber-300 font-bold text-[11px]">
+                      <CloudSun className="w-3.5 h-3.5" />
+                      <span>Agro-Weather</span>
+                    </div>
+                    <div className="text-xs font-bold text-white">
+                      28.5°C | Optimal
+                    </div>
+                    <span className="text-[10px] text-[#5BA33C] font-medium block">
+                      ■ Spray Window Open
+                    </span>
+                  </div>
+
+                  {/* Box 2: Pathology AI */}
+                  <div className="p-3 rounded-2xl bg-white/6 border border-white/12 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[#C46F52] font-bold text-[11px]">
+                      <Bug className="w-3.5 h-3.5" />
+                      <span>Pathology AI</span>
+                    </div>
+                    <div className="text-xs font-bold text-white">
+                      Leaf Scanner
+                    </div>
+                    <span className="text-[10px] text-amber-300 font-medium block">
+                      ■ 0-Risk Early Catch
+                    </span>
+                  </div>
+                </div>
+
+                {/* Section 4: Zero-Latency Offline Mode Footer */}
+                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-1.5 text-white/90 font-medium text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#5BA33C]" />
+                    <span>Zero-Latency Offline Mode</span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-[#5BA33C] tracking-wider">
+                    100% READY
+                  </span>
                 </div>
 
               </div>
@@ -254,51 +320,61 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* 2. KEY CAPABILITIES GRID */}
-      <section className="py-16 bg-cream-200/50 dark:bg-darkbg-card/40 border-y border-cream-300/80 dark:border-darkbg-border">
+      {/* ========================================================
+          2. LIFECYCLE STAGES
+          ======================================================== */}
+      <section className="py-16 glass-dark border-y border-white/10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
-              {isTamil ? 'முக்கிய விவசாய சேவைகள்' : 'Comprehensive Agricultural Decision Suites'}
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#D8C7AE] text-xs font-black uppercase tracking-widest border border-white/16">
+              Complete Farm Lifecycle
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
+              ONE PLATFORM. EVERY FARM DECISION.
             </h2>
-            <p className="text-sm sm:text-base text-earth-700 dark:text-cream-200/80">
-              {isTamil ? 'விவசாயிகளுக்கு தேவையான அனைத்து தொழில்நுட்ப வழிகாட்டல்களும் ஒரே இடத்தில்.' : 'Modular architecture engineered to solve real-world farming challenges with actionable guidance.'}
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
+              {isTamil
+                ? 'பயிர் திட்டமிடல் முதல் அறுவடை விற்பனை வரை அனைத்து நிலைகளிலும் விவசாயிகளுக்கு உதவும் முழுமையான தொழில்நுட்ப தொகுப்பு.'
+                : 'Arka-assist empowers farmers across all six stages of production with explainable, physics-grounded agricultural intelligence.'}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((item, idx) => {
-              const Icon = item.icon;
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
+            {lifecycleStages.map((st, idx) => {
+              const Icon = st.icon;
               return (
-                <Link
+                <div
                   key={idx}
-                  to={item.link}
-                  className="group relative p-6 rounded-2xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border hover:border-forest-500 dark:hover:border-forest-600 shadow-soft hover:shadow-soft-lg transition-all duration-300 flex flex-col justify-between"
+                  className="glass-primary p-4 rounded-3xl flex flex-col justify-between hover:border-[#5BA33C] transition-all duration-300 hover:shadow-glass hover:-translate-y-1 group"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-forest-50 dark:bg-darkbg-surface text-forest-700 dark:text-leaf-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cream-200 dark:bg-darkbg-surface text-earth-700 dark:text-cream-200 border border-cream-300 dark:border-darkbg-border">
-                        {item.tag}
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-black font-mono text-[#5BA33C]">
+                        {st.num}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider uppercase bg-[#0B6623]/25 text-[#5BA33C] border border-[#5BA33C]/30">
+                        {st.step}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-forest-950 dark:text-cream-50 mb-2 group-hover:text-forest-600 dark:group-hover:text-leaf-400 transition-colors">
-                      {item.title}
+                    <div className="w-9 h-9 rounded-xl bg-[#0B6623]/30 border border-[#5BA33C]/30 flex items-center justify-center text-[#5BA33C] group-hover:bg-[#0B6623] group-hover:text-white transition-colors">
+                      <Icon className="w-4 h-4" />
+                    </div>
+
+                    <h3 className="text-sm font-black text-white">
+                      {st.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-earth-700 dark:text-darkbg-muted leading-relaxed">
-                      {item.desc}
+                    <p className="text-[11px] text-[#D8C7AE] leading-relaxed font-medium">
+                      {st.desc}
                     </p>
                   </div>
 
-                  <div className="mt-5 pt-4 border-t border-cream-200 dark:border-darkbg-border/60 flex items-center justify-between text-xs font-bold text-forest-700 dark:text-leaf-400">
-                    <span>{isTamil ? 'பயன்படுத்துக' : 'Open Tool'}</span>
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <div className="pt-2 mt-2 border-t border-white/10 text-[10px] font-bold text-[#D8C7AE] flex items-center gap-1">
+                    <span>Phase {idx + 1}</span>
+                    <ChevronRight className="w-3 h-3 text-[#5BA33C]" />
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>
@@ -306,69 +382,124 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS / AI PIPELINE */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-forest-700 dark:text-leaf-400">
-              {isTamil ? 'எளிய 4-படி செயல்முறை' : 'Seamless 4-Step Process'}
-            </span>
-            <h2 className="text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
-              {isTamil ? 'அக்ரி விஷன் எவ்வாறு செயல்படுகிறது?' : 'How AgriVision Drives Better Yields'}
-            </h2>
-          </div>
+      {/* ========================================================
+          3. FEATURE SHOWCASE
+          ======================================================== */}
+      <section className="py-20 space-y-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#D8C7AE]">
+            Deep-Tech Agronomic Modules
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black text-white">
+            {isTamil ? 'முக்கிய விவசாய நுண்ணறிவு கருவிகள்' : 'Precision Decision Modules'}
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {workflowSteps.map((step, idx) => (
-              <div
-                key={idx}
-                className="relative p-6 rounded-2xl bg-white/80 dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft flex flex-col"
-              >
-                <div className="text-3xl font-black text-forest-600/30 dark:text-leaf-500/30 font-mono mb-2">
-                  {step.num}
+        {features.map((feat) => (
+          <div
+            key={feat.id}
+            className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center ${
+              feat.reverse ? 'lg:flex-row-reverse' : ''
+            }`}
+          >
+            {/* Image Frame Column */}
+            <div className={`lg:col-span-6 ${feat.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/18 aspect-[16/10] group">
+                <img
+                  src={feat.image}
+                  alt={feat.title}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-[0.85]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a11]/95 via-transparent to-black/25 pointer-events-none" />
+                
+                <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-2xl glass-dark border border-white/18 backdrop-blur-md flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-bold text-white">
+                    <Sparkles className="w-3.5 h-3.5 text-[#5BA33C]" />
+                    <span>{feat.tag}</span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-[#D8C7AE]">Active Module</span>
                 </div>
-                <h3 className="text-base font-bold text-forest-950 dark:text-cream-50 mb-2">
-                  {step.title}
+              </div>
+            </div>
+
+            {/* Content Column */}
+            <div className={`lg:col-span-6 space-y-4 ${feat.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
+              <div className="space-y-1.5">
+                <span className="text-xs font-mono font-bold text-[#5BA33C] uppercase tracking-wider">
+                  {feat.tag}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
+                  {feat.title}
                 </h3>
-                <p className="text-xs text-earth-700 dark:text-darkbg-muted leading-relaxed">
-                  {step.desc}
+                <p className="text-xs sm:text-sm text-[#D8C7AE] leading-relaxed font-medium">
+                  {feat.desc}
                 </p>
               </div>
-            ))}
-          </div>
 
-          {/* Workflow architecture link CTA */}
-          <div className="mt-10 text-center">
-            <Link
-              to="/workflow"
-              className="inline-flex items-center gap-2 text-xs font-bold text-forest-700 dark:text-leaf-400 hover:underline"
-            >
-              <Cpu className="w-4 h-4" />
-              <span>{isTamil ? 'முழுமையான சிஸ்டம் கட்டமைப்பை பார்க்க' : 'View Complete System Architecture & Pipeline'}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+              {/* Highlights */}
+              <div className="space-y-2 pt-1">
+                {feat.highlights.map((h, hIdx) => (
+                  <div key={hIdx} className="flex items-center gap-2 text-xs font-semibold text-white">
+                    <div className="w-4 h-4 rounded-full bg-[#0B6623] text-white flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-3 h-3" />
+                    </div>
+                    <span>{h}</span>
+                  </div>
+                ))}
+              </div>
 
-        </div>
+              <div className="pt-2">
+                <Link
+                  to={feat.link}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-white btn-glass-primary shadow-glass transition-all text-xs cursor-pointer group"
+                >
+                  <span>{feat.linkText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        ))}
+
       </section>
 
-      {/* 4. CALL TO ACTION BANNER */}
-      <section className="py-14 bg-gradient-to-br from-forest-800 to-forest-950 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight max-w-2xl mx-auto">
-            {isTamil ? 'உங்கள் விவசாய முடிவுகளை இன்றே எளிதாக்குங்கள்' : 'Ready to Transform Your Agricultural Decisions?'}
+      {/* ========================================================
+          4. CALL TO ACTION PANORAMIC BANNER
+          ======================================================== */}
+      <section className="py-16 relative overflow-hidden glass-dark text-white border-t border-white/16">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#D8C7AE] text-xs font-bold shadow-glass backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#5BA33C]" />
+            <span>Ready for Smarter Harvest Decisions?</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white max-w-2xl mx-auto leading-tight">
+            {isTamil ? 'உங்கள் விவசாயத்தை AI தொழில்நுட்பத்துடன் இணைக்கவும்' : 'Transform Your Agricultural Decisions with AI'}
           </h2>
-          <p className="text-sm sm:text-base text-forest-200 max-w-xl mx-auto">
-            {isTamil ? 'இலவசமாக பதிவு செய்து ஸ்மார்ட் பயிர் வழிகாட்டலை உடனே தொடங்குங்கள்.' : 'Access AI crop recommendation, leaf scanner, and government welfare benefits instantly with full offline support.'}
+
+          <p className="text-xs sm:text-sm text-[#D8C7AE] max-w-xl mx-auto leading-relaxed font-medium">
+            {isTamil
+              ? 'பயிர் பரிந்துரை, இலை ஸ்கேனர், மண்டி விலைகள் மற்றும் அரசு நலத்திட்டங்களை உடனே இலவசமாக பயன்படுத்த தொடங்குங்கள்.'
+              : 'Access instant crop recommendation, foliar pathology scanning, mandi trend predictions, and government subsidies with full offline compatibility.'}
           </p>
-          <div className="pt-2">
+
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
               to="/login"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold bg-leaf-500 hover:bg-leaf-600 text-forest-950 shadow-soft-lg hover:scale-105 transition-all text-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl font-bold btn-glass-primary shadow-2xl transition-all text-xs cursor-pointer"
             >
-              <span>{isTamil ? 'உடனே உள்நுழையவும்' : 'Launch AgriVision Portal'}</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{isTamil ? 'உடனே உள்நுழையவும்' : 'Launch Arka-assist Portal'}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+
+            <Link
+              to="/assistant"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-white btn-glass-secondary transition-all text-xs cursor-pointer"
+            >
+              <Bot className="w-4 h-4 text-[#D8C7AE]" />
+              <span>{t('hero_cta_talk') || 'Talk to AI Assistant'}</span>
             </Link>
           </div>
         </div>

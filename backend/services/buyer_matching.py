@@ -1,183 +1,203 @@
 """
-ARKA-ASSIST — AI Buyer Matching Engine
-Ranks potential wholesale agro-buyers using a multi-factor transparent scoring algorithm
-incorporating crop suitability, volume capacity, geographic proximity, price alignment,
-and quality standards.
+ARKA-ASSIST — Transparent Farmer to Buyer Matching Service
+Ranks verified institutional buyers and agri-producers using an explainable,
+multi-criteria compatibility algorithm.
+
+Data Integrity & Honesty:
+- Buyer records are explicitly flagged as DEMO_DATA / SIMULATED profiles
+- Matching algorithm is 100% explainable rule-based scoring (RULE_BASED)
+- Detailed score breakdown (Crop, Volume, Proximity, Timing, Quality) with explicit match reasons
 """
 
-VERIFIED_BUYERS = [
+DEMO_BUYER_PROFILES = [
     {
         "id": "buyer-01",
-        "name": "Kongu Modern Rice Mills Pvt Ltd",
+        "name": "Kongu Modern Rice Mills Pvt Ltd (Demo)",
         "company_type": "Grain Processing & Milling",
         "target_crops": ["rice", "paddy"],
         "min_quantity_quintals": 20,
         "max_quantity_quintals": 500,
-        "max_price_per_quintal": 2450,
+        "price_expectation_per_quintal": 2450,
         "preferred_district": "Coimbatore",
         "location": "Pollachi Main Road, Coimbatore",
+        "delivery_window": "3 to 5 business days",
+        "quality_requirements": "Grade A (Moisture < 14%, Impurities < 2%)",
         "min_quality_grade": "Grade A",
         "pickup_service": True,
-        "payment_term": "Immediate Bank Transfer on Weighment"
+        "payment_term": "Immediate Bank Transfer on Weighment",
+        "data_source": "DEMO_DATA"
     },
     {
         "id": "buyer-02",
-        "name": "Coimbatore Agro-Producers Consortium",
+        "name": "Coimbatore Agro-Producers Consortium (Demo)",
         "company_type": "Farmer Producer Organization (FPO)",
         "target_crops": ["rice", "maize", "cotton", "banana", "tomato"],
         "min_quantity_quintals": 10,
         "max_quantity_quintals": 300,
-        "max_price_per_quintal": 2380,
+        "price_expectation_per_quintal": 2380,
         "preferred_district": "Coimbatore",
         "location": "RS Puram, Coimbatore",
+        "delivery_window": "1 to 3 business days",
+        "quality_requirements": "Grade B or above (Accepts fair average quality)",
         "min_quality_grade": "Grade B",
         "pickup_service": True,
-        "payment_term": "Same-day Settlement"
+        "payment_term": "Same-day Settlement",
+        "data_source": "DEMO_DATA"
     },
     {
         "id": "buyer-03",
-        "name": "Tirupur Eco-Cotton Spinners",
+        "name": "Tirupur Eco-Cotton Spinners (Demo)",
         "company_type": "Textile Ginning & Spinning Mill",
         "target_crops": ["cotton"],
         "min_quantity_quintals": 15,
         "max_quantity_quintals": 400,
-        "max_price_per_quintal": 7350,
+        "price_expectation_per_quintal": 7350,
         "preferred_district": "Tirupur",
         "location": "Avinashi Road, Tirupur",
+        "delivery_window": "Weekly procurement schedule",
+        "quality_requirements": "Grade A (Staple length > 28mm, Trash < 3%)",
         "min_quality_grade": "Grade A",
         "pickup_service": True,
-        "payment_term": "48-Hour Electronic Clearing"
+        "payment_term": "48-Hour Electronic Clearing",
+        "data_source": "DEMO_DATA"
     },
     {
         "id": "buyer-04",
-        "name": "Nilgiri Fresh Organics Ltd",
+        "name": "Nilgiri Fresh Organics Ltd (Demo)",
         "company_type": "Horticulture Cold Chain Exporter",
         "target_crops": ["banana", "tomato", "fruits"],
         "min_quantity_quintals": 15,
         "max_quantity_quintals": 120,
-        "max_price_per_quintal": 1950,
+        "price_expectation_per_quintal": 1950,
         "preferred_district": "Coimbatore",
         "location": "Mettupalayam Highway, Coimbatore",
+        "delivery_window": "24 to 48 hours (Cold-chain dispatch)",
+        "quality_requirements": "Grade A+ (Uniform color, pesticide residue certified)",
         "min_quality_grade": "Grade A+",
         "pickup_service": True,
-        "payment_term": "Instant Spot Payment"
+        "payment_term": "Instant Spot Payment",
+        "data_source": "DEMO_DATA"
     },
     {
         "id": "buyer-05",
-        "name": "Apex Poultry Feeds & Grains",
+        "name": "Apex Poultry Feeds & Grains (Demo)",
         "company_type": "Livestock Feed Manufacturer",
         "target_crops": ["maize", "rice"],
         "min_quantity_quintals": 25,
         "max_quantity_quintals": 800,
-        "max_price_per_quintal": 2180,
+        "price_expectation_per_quintal": 2180,
         "preferred_district": "Namakkal",
         "location": "Tiruchengode Road, Namakkal",
+        "delivery_window": "Within 7 business days",
+        "quality_requirements": "Grade B (Moisture < 15%)",
         "min_quality_grade": "Grade B",
         "pickup_service": False,
-        "payment_term": "Direct RTGS Transfer"
+        "payment_term": "Direct RTGS Transfer",
+        "data_source": "DEMO_DATA"
     }
 ]
 
 class BuyerMatchingService:
+    def __init__(self):
+        self.buyers = DEMO_BUYER_PROFILES
+
     def match_buyers(self, crop_name="Rice (Paddy)", quantity_quintals=45,
                      expected_price=2400, district="Coimbatore", quality_grade="Grade A+"):
         """
-        Calculates weighted match score for each buyer:
-        - Crop Compatibility (30%)
-        - Quantity Fit (20%)
-        - Distance / District Proximity (20%)
-        - Price Alignment (15%)
-        - Quality Grade Compatibility (15%)
+        Transparent matching algorithm:
+        1. Crop match (30%)
+        2. Quantity range match (25%)
+        3. Proximity / Location match (20%)
+        4. Price alignment (15%)
+        5. Quality compatibility (10%)
         """
         crop_clean = crop_name.lower()
         district_clean = district.lower()
         scored_buyers = []
 
-        for buyer in VERIFIED_BUYERS:
-            # 1. Crop compatibility (30 pts)
-            crop_score = 0.0
-            for tc in buyer["target_crops"]:
-                if tc in crop_clean or crop_clean in tc:
-                    crop_score = 30.0
-                    break
-            if crop_score == 0:
-                continue # Skip completely incompatible buyers
+        for buyer in self.buyers:
+            # 1. Crop Match
+            crop_match = any(tc in crop_clean or crop_clean in tc for tc in buyer["target_crops"])
+            crop_score = 30.0 if crop_match else 0.0
 
-            # 2. Quantity compatibility (20 pts)
-            qty = float(quantity_quintals)
-            if buyer["min_quantity_quintals"] <= qty <= buyer["max_quantity_quintals"]:
-                qty_score = 20.0
-            elif qty < buyer["min_quantity_quintals"]:
-                qty_score = max(5.0, 20.0 - (buyer["min_quantity_quintals"] - qty))
+            # If crop does not match at all, omit or heavily penalize
+            if not crop_match:
+                continue
+
+            # 2. Quantity Match
+            q_min = buyer["min_quantity_quintals"]
+            q_max = buyer["max_quantity_quintals"]
+            if q_min <= quantity_quintals <= q_max:
+                quantity_score = 25.0
+            elif quantity_quintals < q_min:
+                quantity_score = max(5.0, 25.0 - ((q_min - quantity_quintals) * 0.5))
             else:
-                qty_score = 15.0 # Exceeds max, but buyers usually accept partial
+                quantity_score = max(10.0, 25.0 - ((quantity_quintals - q_max) * 0.05))
 
-            # 3. Distance / Location proximity (20 pts)
-            if district_clean in buyer["preferred_district"].lower():
-                dist_score = 20.0
-            elif "tamil nadu" in buyer["location"].lower():
-                dist_score = 14.0
+            # 3. Location Proximity
+            buyer_dist = buyer["preferred_district"].lower()
+            if buyer_dist in district_clean or district_clean in buyer_dist:
+                location_score = 20.0
             else:
-                dist_score = 8.0
+                location_score = 10.0
 
-            # 4. Price compatibility (15 pts)
-            exp_p = float(expected_price)
-            max_p = float(buyer["max_price_per_quintal"])
-            if max_p >= exp_p:
+            # 4. Price Alignment
+            buyer_offered = buyer["price_expectation_per_quintal"]
+            if buyer_offered >= expected_price:
                 price_score = 15.0
             else:
-                diff_pct = (exp_p - max_p) / exp_p
-                price_score = max(2.0, 15.0 - (diff_pct * 30.0))
+                price_diff_pct = (expected_price - buyer_offered) / expected_price
+                price_score = max(0.0, round(15.0 * (1.0 - price_diff_pct), 1))
 
-            # 5. Quality compatibility (15 pts)
-            if "A+" in quality_grade:
-                quality_score = 15.0 # Highest grade satisfies all buyers
-            elif "A" in quality_grade and buyer["min_quality_grade"] in ["Grade A", "Grade B"]:
-                quality_score = 15.0
-            elif "B" in quality_grade and buyer["min_quality_grade"] == "Grade B":
-                quality_score = 13.0
-            else:
-                quality_score = 8.0
+            # 5. Quality Compatibility
+            grade_hierarchy = {"Grade B": 1, "Grade A": 2, "Grade A+": 3}
+            req_rank = grade_hierarchy.get(buyer["min_quality_grade"], 1)
+            offer_rank = grade_hierarchy.get(quality_grade, 2)
+            quality_score = 10.0 if offer_rank >= req_rank else 4.0
 
-            total_match = round(crop_score + qty_score + dist_score + price_score + quality_score, 1)
+            total_score = round(crop_score + quantity_score + location_score + price_score + quality_score, 1)
 
-            # Generate explainability reasons
-            highlights = []
-            if crop_score == 30.0:
-                highlights.append("Direct crop requirement match")
-            if dist_score == 20.0:
-                highlights.append(f"Located in same district ({buyer['preferred_district']})")
-            if price_score == 15.0:
-                highlights.append(f"Price matches budget (Max offer: ₹{buyer['max_price_per_quintal']})")
-            if buyer["pickup_service"]:
-                highlights.append("Offers on-farm harvest pickup")
+            # Explicit reason string (Phase 11 Requirement)
+            reasons = [
+                f"Matched because buyer procures {crop_name}",
+                f"requires {q_min}–{q_max} quintals (offering: {quantity_quintals} q)",
+                f"located in {buyer['preferred_district']} ({'within local district' if location_score == 20 else 'neighboring district'})"
+            ]
+            match_reason = "; ".join(reasons) + "."
 
             scored_buyers.append({
                 "buyer_id": buyer["id"],
                 "name": buyer["name"],
                 "company_type": buyer["company_type"],
-                "location": buyer["location"],
-                "match_percentage": total_match,
-                "max_offered_price": f"₹{buyer['max_price_per_quintal']}/quintal",
-                "payment_term": buyer["payment_term"],
-                "pickup_available": buyer["pickup_service"],
+                "match_score": total_score,
+                "match_score_pct": f"{total_score}%",
+                "match_reason": match_reason,
                 "score_breakdown": {
-                    "crop_compatibility": f"{crop_score}/30",
-                    "quantity_fit": f"{round(qty_score, 1)}/20",
-                    "proximity": f"{dist_score}/20",
-                    "price_alignment": f"{round(price_score, 1)}/15",
-                    "quality_fit": f"{round(quality_score, 1)}/15"
+                    "crop_match_score": crop_score,
+                    "quantity_score": quantity_score,
+                    "location_score": location_score,
+                    "price_score": price_score,
+                    "quality_score": quality_score
                 },
-                "highlights": highlights
+                "buyer_offering_price": buyer_offered,
+                "expected_price": expected_price,
+                "preferred_district": buyer["preferred_district"],
+                "location": buyer["location"],
+                "delivery_window": buyer["delivery_window"],
+                "quality_requirements": buyer["quality_requirements"],
+                "pickup_service": buyer["pickup_service"],
+                "payment_term": buyer["payment_term"],
+                "data_source": buyer["data_source"]
             })
 
-        # Rank by match score descending
-        scored_buyers.sort(key=lambda x: x["match_percentage"], reverse=True)
+        scored_buyers.sort(key=lambda x: x["match_score"], reverse=True)
 
         return {
             "success": True,
-            "system": "Arka-assist AI Buyer Matching Algorithm",
-            "scoring_weights": "Crop (30%) + Quantity (20%) + Distance (20%) + Price (15%) + Quality (15%)",
-            "total_matches_found": len(scored_buyers),
+            "status_type": "RULE_BASED",
+            "model_engine": "Arka-assist Transparent Matching Rule Engine (v2.0)",
+            "data_notice": "Institutional buyer profiles are demo datasets for testing agricultural matchmaking algorithms.",
+            "total_matches": len(scored_buyers),
+            "matched_buyers": scored_buyers,
             "best_buyer_matches": scored_buyers
         }

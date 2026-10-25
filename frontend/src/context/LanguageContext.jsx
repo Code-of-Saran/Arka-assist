@@ -11,11 +11,16 @@ const translations = {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('agrivision_language') || 'en';
+    const legacy = localStorage.getItem('agrivision_language');
+    if (legacy) {
+      localStorage.removeItem('agrivision_language');
+    }
+    return localStorage.getItem('arka_assist_language') || legacy || 'en';
   });
 
   useEffect(() => {
-    localStorage.setItem('agrivision_language', language);
+    localStorage.setItem('arka_assist_language', language);
+    localStorage.removeItem('agrivision_language');
     document.documentElement.lang = language;
   }, [language]);
 

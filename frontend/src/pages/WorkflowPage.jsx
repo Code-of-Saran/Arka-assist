@@ -10,10 +10,7 @@ import {
   BarChart3,
   Tractor,
   ArrowDown,
-  ArrowRight,
-  Info,
   ShieldCheck,
-  Zap,
   GitBranch
 } from 'lucide-react';
 
@@ -122,20 +119,22 @@ const WorkflowPage = () => {
   const [selectedStep, setSelectedStep] = useState(PIPELINE_STEPS[3]); // Default on ML Processing
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in-up">
       
       {/* Header */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft">
-        <div className="flex items-center gap-2 text-xs font-bold text-forest-700 dark:text-leaf-400 uppercase tracking-wider mb-1">
-          <GitBranch className="w-4 h-4" />
-          <span>Architectural Blueprint</span>
+      <div className="glass-light p-6 rounded-3xl relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#0B6623] uppercase tracking-wider mb-1">
+            <GitBranch className="w-4 h-4 text-[#0B6623]" />
+            <span>Architectural Blueprint</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#17351F] tracking-tight">
+            {t('workflow_title')}
+          </h1>
+          <p className="text-xs sm:text-sm text-[#4A3A30] mt-1 max-w-3xl font-medium">
+            {t('workflow_subtitle')}
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
-          {t('workflow_title')}
-        </h1>
-        <p className="text-xs sm:text-sm text-earth-700 dark:text-cream-200/80 mt-1 max-w-3xl">
-          {t('workflow_subtitle')}
-        </p>
       </div>
 
       {/* Interactive Workflow Diagram & Inspector */}
@@ -143,10 +142,10 @@ const WorkflowPage = () => {
         
         {/* Visual Pipeline Flow Diagram (7 Cols) */}
         <div className="lg:col-span-7 space-y-3">
-          <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft space-y-3">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-earth-800 dark:text-cream-100 pb-2 border-b border-cream-200 dark:border-darkbg-border flex items-center justify-between">
+          <div className="glass-light p-6 rounded-3xl space-y-3">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-[#17351F] pb-2 border-b border-[#765341]/15 flex items-center justify-between">
               <span>End-to-End Decision Pipeline</span>
-              <span className="text-xs font-mono text-forest-700 dark:text-leaf-400 font-bold">8 Operational Stages</span>
+              <span className="text-xs font-mono text-[#0B6623] font-bold px-2.5 py-0.5 rounded-full bg-[#0B6623]/15 border border-[#0B6623]/30">8 Operational Stages</span>
             </h2>
 
             <div className="space-y-2.5 pt-2">
@@ -159,28 +158,28 @@ const WorkflowPage = () => {
                       onClick={() => setSelectedStep(step)}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
                         isSelected
-                          ? 'bg-forest-800 text-white border-forest-700 shadow-soft-lg ring-2 ring-forest-500/40'
-                          : 'bg-cream-50 dark:bg-darkbg-surface text-forest-950 dark:text-cream-100 border-cream-200 dark:border-darkbg-border hover:border-forest-400'
+                          ? 'glass-light bg-[#0B6623]/15 text-[#17351F] border-[#0B6623] shadow-glass'
+                          : 'glass-card-light text-[#17351F] hover:border-[#765341]/40'
                       }`}
                     >
                       <div className="flex items-center gap-3.5">
                         <div
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 transition-colors ${
                             isSelected
-                              ? 'bg-forest-700 text-leaf-300'
-                              : 'bg-cream-200 dark:bg-darkbg-card text-forest-700 dark:text-leaf-400'
+                              ? 'bg-[#0B6623] text-white shadow-glass'
+                              : 'bg-[#0B6623]/10 text-[#0B6623] border border-[#0B6623]/25'
                           }`}
                         >
-                          <Icon className="w-5 h-5" />
+                          <Icon className={`w-5 h-5 ${isSelected ? 'text-white' : 'text-[#0B6623]'}`} />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-mono font-bold opacity-75">{step.step}</span>
-                            <h3 className="text-sm font-bold">
+                            <span className="text-xs font-mono font-bold text-[#0B6623]">{step.step}</span>
+                            <h3 className="text-sm font-black text-[#17351F]">
                               {isTamil ? step.title_ta : step.title_en}
                             </h3>
                           </div>
-                          <p className="text-xs opacity-80 mt-0.5 line-clamp-1">
+                          <p className="text-xs text-[#5F5148] mt-0.5 line-clamp-1 font-medium">
                             {isTamil ? step.subtitle_ta : step.subtitle_en}
                           </p>
                         </div>
@@ -189,8 +188,8 @@ const WorkflowPage = () => {
                       <span
                         className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase ${
                           isSelected
-                            ? 'bg-forest-950 text-leaf-300 border border-forest-600'
-                            : 'bg-cream-200 dark:bg-darkbg-card text-earth-700 dark:text-darkbg-muted border border-cream-300 dark:border-darkbg-border'
+                            ? 'bg-[#0B6623]/20 text-[#0B6623] border border-[#0B6623]/40'
+                            : 'bg-white/40 text-[#5F5148] border border-[#765341]/15'
                         }`}
                       >
                         {step.tech.split(' ')[0]}
@@ -199,7 +198,7 @@ const WorkflowPage = () => {
 
                     {/* Connecting Visual Arrow */}
                     {idx < PIPELINE_STEPS.length - 1 && (
-                      <div className="flex justify-center my-0.5 text-forest-600 dark:text-leaf-400 opacity-40">
+                      <div className="flex justify-center my-1 text-[#0B6623] opacity-80">
                         <ArrowDown className="w-3.5 h-3.5" />
                       </div>
                     )}
@@ -214,48 +213,48 @@ const WorkflowPage = () => {
         <div className="lg:col-span-5 space-y-6">
           
           {/* Selected Stage Inspector Card */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-cream-200 dark:border-darkbg-border">
-              <span className="text-xs font-bold uppercase tracking-wider text-earth-600 dark:text-darkbg-muted">
+          <div className="glass-light p-6 rounded-3xl space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#765341]/15">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0B6623]">
                 Stage Deep-Dive Inspector
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-forest-100 dark:bg-forest-950 text-forest-800 dark:text-leaf-300">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#0B6623]/15 text-[#0B6623] border border-[#0B6623]/30">
                 Step {selectedStep.step} / 08
               </span>
             </div>
 
             <div>
-              <h3 className="text-xl font-black text-forest-950 dark:text-cream-50">
+              <h3 className="text-xl font-black text-[#17351F]">
                 {isTamil ? selectedStep.title_ta : selectedStep.title_en}
               </h3>
-              <p className="text-xs text-earth-700 dark:text-darkbg-muted mt-1 leading-relaxed">
+              <p className="text-xs text-[#4A3A30] mt-1 leading-relaxed font-medium">
                 {isTamil ? selectedStep.subtitle_ta : selectedStep.subtitle_en}
               </p>
             </div>
 
             {/* Implementation Details */}
-            <div className="p-4 rounded-2xl bg-cream-50 dark:bg-darkbg-surface border border-cream-200 dark:border-darkbg-border space-y-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-forest-800 dark:text-leaf-300">
+            <div className="p-4 rounded-2xl glass-card-light space-y-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B6623]">
                 Internal Mechanism & Logic
               </span>
-              <p className="text-xs sm:text-sm text-earth-900 dark:text-cream-100 leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-[#17351F] leading-relaxed font-medium">
                 {isTamil ? selectedStep.details_ta : selectedStep.details_en}
               </p>
             </div>
 
             {/* Underlying Technology Stack */}
-            <div className="p-4 rounded-2xl bg-forest-50/80 dark:bg-darkbg-surface border border-forest-200/80 dark:border-darkbg-border space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-forest-900 dark:text-leaf-300">
+            <div className="p-4 rounded-2xl glass-card-light space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B6623]">
                 Underlying Technology
               </span>
-              <div className="text-xs font-mono font-bold text-forest-950 dark:text-cream-50">
+              <div className="text-xs font-mono font-bold text-[#17351F]">
                 {selectedStep.tech}
               </div>
             </div>
 
             {/* Offline-First Guarantee Banner */}
-            <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-darkbg-base border border-amber-200 dark:border-darkbg-border flex items-center gap-2.5 text-xs text-amber-900 dark:text-amber-300">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+            <div className="p-3.5 rounded-2xl bg-[#0B6623]/15 border border-[#0B6623]/30 flex items-center gap-2.5 text-xs text-[#0B6623] font-bold">
+              <ShieldCheck className="w-4 h-4 text-[#0B6623] shrink-0" />
               <span>100% Offline Compatible: Stage functions with zero external network connectivity.</span>
             </div>
           </div>
@@ -269,3 +268,4 @@ const WorkflowPage = () => {
 };
 
 export default WorkflowPage;
+

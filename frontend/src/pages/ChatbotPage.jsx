@@ -8,12 +8,9 @@ import {
   User,
   Send,
   Trash2,
-  Sparkles,
-  ShieldCheck,
-  HelpCircle,
-  CornerDownLeft,
   Lightbulb,
-  Mic
+  Mic,
+  Sparkles
 } from 'lucide-react';
 
 const ChatbotPage = () => {
@@ -94,19 +91,19 @@ const ChatbotPage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
       
-      {/* Header */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      {/* Header - Liquid Glass & Deep Green Accent */}
+      <div className="glass-light p-6 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative overflow-hidden">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold text-forest-700 dark:text-leaf-400 uppercase tracking-wider mb-1">
-            <Bot className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-bold text-[#0B6623] uppercase tracking-wider mb-1">
+            <Sparkles className="w-4 h-4 text-[#0B6623]" />
             <span>{t('chat_offline_badge')}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#17351F] tracking-tight">
             {t('chat_title')}
           </h1>
-          <p className="text-xs sm:text-sm text-earth-700 dark:text-cream-200/80 mt-0.5">
+          <p className="text-xs sm:text-sm text-[#4A3A30] mt-0.5 font-medium">
             {t('chat_subtitle')}
           </p>
         </div>
@@ -115,26 +112,26 @@ const ChatbotPage = () => {
           <button
             type="button"
             onClick={() => setIsVoiceOpen(true)}
-            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-forest-50 dark:bg-darkbg-surface text-forest-800 dark:text-leaf-300 hover:bg-forest-100 border border-forest-300 dark:border-forest-700/60 transition-all flex items-center gap-1.5 shadow-sm"
+            className="px-3.5 py-2 rounded-2xl text-xs font-bold btn-glass-secondary flex items-center gap-1.5 shadow-glass cursor-pointer backdrop-blur-md text-[#17351F]"
           >
-            <Mic className="w-3.5 h-3.5 text-forest-600 dark:text-leaf-400 animate-pulse" />
+            <Mic className="w-3.5 h-3.5 text-[#0B6623]" />
             <span>{isTamil ? 'குரல் பயன்முறை' : 'Voice Mode'}</span>
           </button>
           <button
             type="button"
             onClick={handleClearChat}
-            className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cream-100 dark:bg-darkbg-surface hover:bg-rose-50 dark:hover:bg-rose-950/40 text-earth-700 dark:text-cream-200 hover:text-rose-600 dark:hover:text-rose-400 border border-cream-300 dark:border-darkbg-border transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-2xl text-xs font-semibold btn-glass-secondary text-[#5F5148] hover:text-[#17351F] flex items-center gap-1.5 cursor-pointer"
           >
-            <Trash2 className="w-3.5 h-3.5" />
+            <Trash2 className="w-3.5 h-3.5 text-[#5F5148]" />
             <span>{t('chat_clear')}</span>
           </button>
         </div>
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="p-4 rounded-2xl bg-cream-50/80 dark:bg-darkbg-surface/60 border border-cream-300/80 dark:border-darkbg-border space-y-2">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-earth-700 dark:text-cream-200">
-          <Lightbulb className="w-3.5 h-3.5 text-amber-500" />
+      <div className="glass-light p-4 rounded-3xl space-y-2.5">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#17351F]">
+          <Lightbulb className="w-3.5 h-3.5 text-[#0B6623]" />
           <span>{t('chat_suggested_title')}:</span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -145,7 +142,7 @@ const ChatbotPage = () => {
                 key={idx}
                 type="button"
                 onClick={() => handleSendMessage(promptText)}
-                className="px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-darkbg-card hover:bg-forest-50 dark:hover:bg-darkbg-border text-forest-900 dark:text-cream-100 border border-cream-300 dark:border-darkbg-border transition-all text-left shadow-sm"
+                className="px-3 py-1.5 rounded-xl text-xs font-bold glass-card-light text-[#17351F] hover:border-[#0B6623] transition-all text-left cursor-pointer"
               >
                 {promptText}
               </button>
@@ -155,7 +152,7 @@ const ChatbotPage = () => {
       </div>
 
       {/* Chat Messages Container */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft min-h-[440px] max-h-[550px] overflow-y-auto flex flex-col justify-between">
+      <div className="glass-light p-6 rounded-3xl min-h-[460px] max-h-[580px] overflow-y-auto flex flex-col justify-between relative">
         
         {/* Messages List */}
         <div className="space-y-4 mb-4">
@@ -168,26 +165,26 @@ const ChatbotPage = () => {
               >
                 {/* Avatar */}
                 <div
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
+                  className={`w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 shadow-glass ${
                     isUser
-                      ? 'bg-earth-600 text-white'
-                      : 'bg-gradient-to-br from-forest-600 to-leaf-500 text-white'
+                      ? 'bg-[#0B6623] text-white border border-white/20'
+                      : 'bg-[#0B6623]/10 text-[#0B6623] border border-[#0B6623]/25'
                   }`}
                 >
-                  {isUser ? <User className="w-4 h-4" /> : <Bot className="w-5 h-5" />}
+                  {isUser ? <User className="w-4 h-4 text-white" /> : <Bot className="w-5 h-5 text-[#0B6623]" />}
                 </div>
 
                 {/* Message Bubble */}
                 <div
                   className={`max-w-[80%] p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${
                     isUser
-                      ? 'bg-forest-700 text-white rounded-tr-none font-medium'
-                      : 'bg-cream-100 dark:bg-darkbg-surface text-earth-900 dark:text-cream-100 rounded-tl-none border border-cream-200 dark:border-darkbg-border whitespace-pre-line'
+                      ? 'bg-[#0B6623] text-white rounded-tr-none font-medium shadow-glass border border-white/15'
+                      : 'glass-card-light text-[#17351F] rounded-tl-none border border-[#765341]/20 whitespace-pre-line shadow-xs'
                   }`}
                 >
-                  <p>{msg.text}</p>
+                  <p className={`${isUser ? 'text-white' : 'text-[#17351F]'} font-medium`}>{msg.text}</p>
                   {msg.source && (
-                    <span className="block mt-2 pt-2 border-t border-cream-300/40 dark:border-darkbg-border/60 text-[10px] text-earth-500 dark:text-darkbg-muted font-mono">
+                    <span className="block mt-2 pt-2 border-t border-[#765341]/15 text-[10px] text-[#0B6623] font-mono font-bold">
                       Source: {msg.source}
                     </span>
                   )}
@@ -199,14 +196,14 @@ const ChatbotPage = () => {
           {/* Typing Animation */}
           {isTyping && (
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-forest-600 text-white flex items-center justify-center">
-                <Bot className="w-5 h-5 animate-pulse" />
+              <div className="w-9 h-9 rounded-2xl bg-[#0B6623]/10 text-[#0B6623] border border-[#0B6623]/25 flex items-center justify-center">
+                <Bot className="w-5 h-5" />
               </div>
-              <div className="p-3.5 rounded-2xl rounded-tl-none bg-cream-100 dark:bg-darkbg-surface border border-cream-200 dark:border-darkbg-border flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-forest-600 animate-bounce"></span>
-                <span className="w-2 h-2 rounded-full bg-forest-600 animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-2 h-2 rounded-full bg-forest-600 animate-bounce [animation-delay:0.4s]"></span>
-                <span className="text-xs text-earth-600 dark:text-darkbg-muted ml-2 font-medium">
+              <div className="p-3.5 rounded-2xl rounded-tl-none glass-card-light border border-[#765341]/20 flex items-center gap-1.5 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-[#0B6623] animate-bounce"></span>
+                <span className="w-2 h-2 rounded-full bg-[#0B6623] animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#0B6623] animate-bounce [animation-delay:0.4s]"></span>
+                <span className="text-xs text-[#5F5148] ml-2 font-bold">
                   {t('chat_typing')}
                 </span>
               </div>
@@ -222,30 +219,30 @@ const ChatbotPage = () => {
             e.preventDefault();
             handleSendMessage();
           }}
-          className="relative pt-2 border-t border-cream-200 dark:border-darkbg-border"
+          className="relative pt-3 border-t border-[#765341]/15"
         >
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={t('chat_placeholder')}
-            className="w-full pl-4 pr-14 py-3 rounded-2xl text-xs sm:text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 focus:outline-none focus:ring-2 focus:ring-forest-500 font-medium"
+            className="w-full pl-4 pr-24 py-3.5 rounded-2xl text-xs sm:text-sm glass-input-light text-[#17351F] placeholder-[#5F5148] focus:outline-none focus:border-[#0B6623] font-medium transition-all"
           />
-          <div className="absolute right-2 top-3.5 flex items-center gap-1.5">
+          <div className="absolute right-2 top-4.5 flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => setIsVoiceOpen(true)}
               title="Voice Assistant"
-              className="p-2 rounded-xl text-forest-700 dark:text-leaf-400 hover:bg-cream-200 dark:hover:bg-darkbg-border transition-colors"
+              className="p-2 rounded-xl text-[#0B6623] hover:bg-[#0B6623]/10 transition-colors cursor-pointer"
             >
               <Mic className="w-4 h-4" />
             </button>
             <button
               type="submit"
               disabled={!inputValue.trim()}
-              className="p-2 rounded-xl bg-forest-700 hover:bg-forest-800 disabled:opacity-40 text-white transition-colors"
+              className="p-2 rounded-xl btn-glass-primary disabled:opacity-30 text-white transition-all cursor-pointer shadow-glass"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 text-white" />
             </button>
           </div>
         </form>
@@ -262,3 +259,4 @@ const ChatbotPage = () => {
 };
 
 export default ChatbotPage;
+

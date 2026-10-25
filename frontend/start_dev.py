@@ -2,6 +2,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 
 if sys.platform == "win32":
     try:
@@ -10,7 +11,7 @@ if sys.platform == "win32":
         pass
 
 frontend_dir = os.path.dirname(os.path.abspath(__file__))
-build_dir = r"C:\Users\saran\AppData\Local\AgriVision_Build"
+build_dir = os.path.join(os.environ.get("LOCALAPPDATA", tempfile.gettempdir()), "ArkaAssist_Build")
 local_node_modules = os.path.join(frontend_dir, "node_modules")
 
 # If local node_modules exists, run directly in frontend_dir for maximum speed & independence

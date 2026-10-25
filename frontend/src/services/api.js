@@ -191,30 +191,104 @@ export async function processVoiceIntent(transcript, language = 'en') {
   } catch (err) {
     console.warn('[Arka-assist API] Voice service backend offline, using client command matcher:', err.message);
     const clean = (transcript || '').toLowerCase();
+    const isTa = language === 'ta';
     
-    if (clean.includes('weather') || clean.includes('வானிலை')) {
-      return { success: true, type: 'navigation_action', target_route: '/weather', speech_response: 'Opening Weather and Agro-Meteorology.' };
+    if (clean.includes('weather') || clean.includes('வானிலை') || clean.includes('மழை')) {
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/weather',
+        speech_response: isTa
+          ? 'வானிலை பக்கத்திற்கு செல்கிறேன். கோயம்புத்தூரில் இன்றைய வெப்பநிலை 28.5 டிகிரி செல்சியஸ், மழை வாய்ப்பு குறைவு.'
+          : 'Opening Weather and Agro-Meteorology. Today is 28.5 degrees Celsius in Coimbatore.'
+      };
     }
     if (clean.includes('crop') || clean.includes('பயிர்')) {
-      return { success: true, type: 'navigation_action', target_route: '/crop-recommendation', speech_response: 'Opening Crop Recommendation Engine.' };
+      if (clean.includes('பிரச்சனை') || clean.includes('நோய்') || clean.includes('health') || clean.includes('நிலை')) {
+        return {
+          success: true,
+          type: 'navigation_action',
+          target_route: '/daily-analysis',
+          speech_response: isTa
+            ? 'உங்கள் பயிர் நிலைமையை நான் பகுப்பாய்வு செய்கிறேன். நிலம் 4-ல் (தக்காளி) லேசான வெப்ப அழுத்தம் உள்ளது.'
+            : 'Analyzing your crop status. Field 4 (Tomato) shows mild thermal stress.'
+        };
+      }
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/crop-recommendation',
+        speech_response: isTa
+          ? 'பயிர் பரிந்துரை பக்கத்திற்கு செல்கிறேன். மண் NPK அளவுகளை உள்ளிட்டு உகந்த பயிரை அறியலாம்.'
+          : 'Opening Crop Recommendation Engine.'
+      };
     }
     if (clean.includes('market') || clean.includes('விலை') || clean.includes('சந்தை')) {
-      return { success: true, type: 'navigation_action', target_route: '/market', speech_response: 'Opening Market Dashboard.' };
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/market',
+        speech_response: isTa
+          ? 'சந்தை நுண்ணறிவு பக்கத்தை திறக்கிறேன். நெல் குவிண்டாலுக்கு ₹2,350 ஆக உயர்ந்துள்ளது.'
+          : 'Opening Market Dashboard. Paddy is trading at 2,350 rupees per quintal.'
+      };
     }
-    if (clean.includes('sell') || clean.includes('விற்பனை')) {
-      return { success: true, type: 'navigation_action', target_route: '/sell-decision', speech_response: 'Opening AI Sell/Wait Decision.' };
+    if (clean.includes('sell') || clean.includes('விற்பனை') || clean.includes('விற்கலாமா')) {
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/sell-decision',
+        speech_response: isTa
+          ? 'விற்பனை முடிவு பக்கத்திற்கு செல்கிறேன். விலை உயர்வு காரணமாக 7 முதல் 10 நாட்கள் காத்திருக்க பரிந்துரைக்கப்படுகிறது.'
+          : 'Opening AI Sell or Wait Decision. Recommendation is to WAIT for 7 to 10 days.'
+      };
     }
-    if (clean.includes('farm') || clean.includes('பண்ணை') || clean.includes('3d')) {
-      return { success: true, type: 'navigation_action', target_route: '/farm-3d', speech_response: 'Opening 3D Farm Digital Twin.' };
+    if (clean.includes('farm') || clean.includes('பண்ணை') || clean.includes('வயல்') || clean.includes('3d')) {
+      if (clean.includes('செய்ய வேண்டும்') || clean.includes('வேலை') || clean.includes('action')) {
+        return {
+          success: true,
+          type: 'navigation_action',
+          target_route: '/dashboard',
+          speech_response: isTa
+            ? 'இன்றைய முன்னுரிமை விவசாய பணிகளை காட்டுகிறேன். முக்கிய பணி: நிலம் 2-ல் ஈரப்பத குறைபாட்டை சரிபார்க்கவும்.'
+            : "Displaying today's prioritized action plan. Check Field 2 thermal canopy for moisture deficit."
+        };
+      }
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/farm-3d',
+        speech_response: isTa
+          ? 'உங்கள் 3D டிஜிட்டல் பண்ணை மாதிரியை திறக்கிறேன்.'
+          : 'Opening 3D Farm Digital Twin.'
+      };
     }
     if (clean.includes('thermal') || clean.includes('வெப்ப')) {
-      return { success: true, type: 'navigation_action', target_route: '/thermal', speech_response: 'Opening Thermal Crop Imaging.' };
+      return {
+        success: true,
+        type: 'navigation_action',
+        target_route: '/thermal',
+        speech_response: isTa
+          ? 'வெப்பநிலை பயிர் பட ஆய்வை திறக்கிறேன்.'
+          : 'Opening Thermal Crop Imaging.'
+      };
+    }
+    if (clean.includes('உரம்') || clean.includes('fertilizer') || clean.includes('ஊட்டச்சத்து')) {
+      return {
+        success: true,
+        type: 'conversational_query',
+        speech_response: isTa
+          ? 'உங்கள் பயிருக்கு ஏற்ற உரப் பரிந்துரை: சரிவிகித NPK மற்றும் தழைச்சத்து குறைபாட்டை போக்க 1% யூரியா இலைவழி தெளிப்பு பரிந்துரைக்கப்படுகிறது.'
+          : 'Fertilizer recommendation: Balanced NPK fertilizer with 1% Urea foliar spray is recommended for your soil.'
+      };
     }
 
     return {
       success: true,
       type: 'conversational_query',
-      speech_response: language === 'ta' ? 'அர்கா-அசிஸ்ட் குரல் வழிகாட்டி தயாராக உள்ளது.' : 'Arka-assist voice companion is ready.',
+      speech_response: isTa
+        ? 'அர்கா-அசிஸ்ட் குரல் வழிகாட்டி தயாராக உள்ளது. உங்கள் கேள்வியை கேட்கலாம்.'
+        : 'Arka-assist voice companion is ready. How can I help with your farming today?',
       recognized_text: transcript
     };
   }

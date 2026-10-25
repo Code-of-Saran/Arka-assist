@@ -52,7 +52,7 @@ VOICE_COMMAND_REGISTRY = [
     {
         "intent": "daily_actions",
         "route": "/dashboard",
-        "keywords": ["advice", "farming advice", "daily action", "what should i do", "today plan", "விவசாய ஆலோசனை", "இன்றைய வேலை", "ஆலோசனை"],
+        "keywords": ["advice", "farming advice", "daily action", "what should i do", "today plan", "விவசாய ஆலோசனை", "இன்றைய வேலை", "ஆலோசனை", "வயலுக்கு என்ன செய்ய வேண்டும்", "என்ன செய்ய வேண்டும்", "இன்றைய பணி", "வயல்"],
         "speech_en": "Displaying today's prioritized action plan. High priority: check Field 2 thermal canopy for moisture deficit.",
         "speech_ta": "இன்றைய முன்னுரிமை விவசாய பணிகளை காட்டுகிறேன். முக்கிய பணி: நிலம் 2-ல் ஈரப்பத குறைபாட்டை சரிபார்க்கவும்."
     },
@@ -83,6 +83,13 @@ VOICE_COMMAND_REGISTRY = [
         "keywords": ["buyer match", "matching buyers", "find buyers", "best buyers", "கொள்முதல் செய்வோர்", "வாங்குவோர் பொருத்தம்"],
         "speech_en": "Opening AI Buyer Matching. Viewing ranked agro-buyers based on price, location, and volume compatibility.",
         "speech_ta": "AI வாங்குவோர் பொருத்தத்தை திறக்கிறேன். உங்கள் பயிருக்கு ஏற்ற சிறந்த வாங்குவோரை தரவரிசைப்படுத்துகிறது."
+    },
+    {
+        "intent": "disease_detection",
+        "route": "/disease",
+        "keywords": ["disease", "leaf disease", "check disease", "detect disease", "plant disease", "leaf spot", "நோய்", "இலை நோய்", "நோய் கண்டறிதல்", "நோய் ஆய்வு", "பயிர் நோய்"],
+        "speech_en": "Opening Plant Disease Detection. Upload a leaf photo to diagnose pathology using our PyTorch transfer learning model.",
+        "speech_ta": "பயிர் நோய் கண்டறிதல் பக்கத்தை திறக்கிறேன். இலை புகைப்படத்தை பதிவேற்றி நோயை துல்லியமாக கண்டறியலாம்."
     }
 ]
 

@@ -7,13 +7,12 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
-  ShieldCheck,
-  Award,
   FileText,
   Users,
   IndianRupee,
-  Sparkles,
-  Filter
+  Filter,
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react';
 
 const CATEGORIES = [
@@ -61,20 +60,27 @@ const SchemesPage = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 animate-fade-in-up">
       
-      {/* Header & Search */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+      {/* Header Banner */}
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white shadow-2xl min-h-[170px] flex flex-col justify-center border border-white/18">
+        <img
+          src="/assets/images/crop-fields.jpg"
+          alt="Government Agricultural Schemes"
+          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.38] contrast-[1.15] scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F3D25]/95 via-[#0B6623]/82 to-[#0F3D25]/75 z-10 pointer-events-none" />
+
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-20">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-forest-700 dark:text-leaf-400 uppercase tracking-wider mb-1">
-              <BookOpenCheck className="w-4 h-4" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold mb-2 border border-white/25 backdrop-blur-md shadow-xs">
+              <BookOpenCheck className="w-3.5 h-3.5 text-[#5BA33C]" />
               <span>National & State Welfare Schemes</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-md">
               {t('schemes_title')}
             </h1>
-            <p className="text-xs sm:text-sm text-earth-700 dark:text-cream-200/80 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-white/85 mt-1 max-w-xl font-medium leading-relaxed">
               {t('schemes_subtitle')}
             </p>
           </div>
@@ -87,12 +93,12 @@ const SchemesPage = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('schemes_search_placeholder')}
-                className="w-full pl-10 pr-24 py-3 rounded-2xl text-xs sm:text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 focus:outline-none focus:ring-2 focus:ring-forest-500 font-medium"
+                className="w-full pl-10 pr-24 py-3 rounded-2xl text-xs sm:text-sm bg-black/40 backdrop-blur-md border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#5BA33C] font-medium transition-all"
               />
-              <Search className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <Search className="w-4 h-4 text-[#D8C7AE] absolute left-3.5 top-3.5" />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1.5 px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-forest-700 hover:bg-forest-800 transition-colors"
+                className="absolute right-1.5 top-1.5 px-4 py-1.5 rounded-xl text-xs font-bold btn-glass-primary shadow-glass cursor-pointer"
               >
                 Search
               </button>
@@ -101,9 +107,9 @@ const SchemesPage = () => {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mt-5 pt-4 border-t border-cream-200 dark:border-darkbg-border">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-earth-600 dark:text-darkbg-muted mr-1">
-            <Filter className="w-3.5 h-3.5" />
+        <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-white/12 relative z-20">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#D8C7AE] mr-1">
+            <Filter className="w-3.5 h-3.5 text-[#5BA33C]" />
             <span>Category:</span>
           </div>
           {CATEGORIES.map((cat) => (
@@ -111,10 +117,10 @@ const SchemesPage = () => {
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+              className={`px-3 py-1 rounded-full text-xs font-bold border transition-all cursor-pointer backdrop-blur-md ${
                 selectedCategory === cat
-                  ? 'bg-forest-700 text-white border-forest-700 shadow-sm'
-                  : 'bg-cream-100 dark:bg-darkbg-surface text-earth-800 dark:text-cream-200 border-cream-300 dark:border-darkbg-border hover:bg-forest-50'
+                  ? 'bg-[#0B6623] text-white border-[#5BA33C]/60 shadow-glass'
+                  : 'bg-white/8 text-white/85 hover:bg-white/16 border-white/14'
               }`}
             >
               {cat === 'All' ? t('schemes_filter_all') : cat}
@@ -131,105 +137,100 @@ const SchemesPage = () => {
             return (
               <div
                 key={scheme.id}
-                className="rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft overflow-hidden transition-all duration-200"
+                className="rounded-3xl glass-dark border border-white/14 overflow-hidden transition-all duration-300 hover:border-[#5BA33C]/40"
               >
                 {/* Scheme Header Summary */}
                 <div
                   onClick={() => toggleExpand(scheme.id)}
-                  className="p-6 cursor-pointer hover:bg-cream-50/50 dark:hover:bg-darkbg-surface/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="p-6 cursor-pointer hover:bg-white/5 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="space-y-1.5 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-forest-100 dark:bg-forest-950/60 text-forest-800 dark:text-leaf-300 border border-forest-200 dark:border-forest-800">
-                        {isTamil ? (scheme.category_ta || scheme.category) : scheme.category}
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0B6623]/35 text-[#5BA33C] border border-[#5BA33C]/40">
+                        {scheme.category}
                       </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cream-200 dark:bg-darkbg-surface text-earth-700 dark:text-cream-200 border border-cream-300 dark:border-darkbg-border">
-                        {isTamil ? (scheme.level_ta || scheme.level) : scheme.level}
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/10 text-[#D8C7AE] border border-white/16">
+                        {scheme.target_state}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-forest-950 dark:text-cream-50">
+                    <h2 className="text-lg font-black text-white">
                       {isTamil ? scheme.name_ta : scheme.name_en}
-                    </h3>
+                    </h2>
+                    <p className="text-xs text-[#D8C7AE] line-clamp-1 font-medium">
+                      {isTamil ? scheme.desc_ta : scheme.desc_en}
+                    </p>
                   </div>
 
-                  <div className="flex items-center gap-3 self-end sm:self-center">
-                    <span className="text-xs font-bold text-forest-700 dark:text-leaf-400">
-                      {isExpanded ? 'Hide Details' : 'View Details'}
-                    </span>
-                    <div className="w-8 h-8 rounded-full bg-cream-200 dark:bg-darkbg-surface flex items-center justify-center text-forest-800 dark:text-cream-100">
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  <div className="flex items-center gap-4 shrink-0">
+                    <div className="text-right">
+                      <span className="text-[10px] font-bold text-[#D8C7AE] uppercase tracking-wider block">
+                        Assistance Value
+                      </span>
+                      <span className="text-base font-black text-[#5BA33C] font-mono">
+                        {scheme.subsidy_amount}
+                      </span>
                     </div>
+
+                    <button
+                      type="button"
+                      className="p-2 rounded-xl bg-white/8 text-[#D8C7AE] hover:text-white transition-colors"
+                    >
+                      {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                    </button>
                   </div>
                 </div>
 
-                {/* Expanded Details Body */}
+                {/* Expanded Details Drawer */}
                 {isExpanded && (
-                  <div className="px-6 pb-6 pt-2 border-t border-cream-200 dark:border-darkbg-border space-y-4 bg-cream-50/40 dark:bg-darkbg-surface/30">
-                    
-                    {/* Benefits Box */}
-                    <div className="p-4 rounded-2xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-forest-800 dark:text-leaf-300 mb-1.5 flex items-center gap-1.5">
-                        <IndianRupee className="w-4 h-4 text-emerald-600" />
-                        <span>{t('schemes_benefits')}</span>
-                      </h4>
-                      <p className="text-xs sm:text-sm text-earth-800 dark:text-cream-200/90 leading-relaxed font-medium">
-                        {isTamil ? scheme.benefits_ta : scheme.benefits_en}
-                      </p>
-                    </div>
-
-                    {/* Eligibility & Documents Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Eligibility */}
-                      <div className="p-4 rounded-2xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-forest-800 dark:text-leaf-300 mb-1.5 flex items-center gap-1.5">
-                          <Users className="w-4 h-4 text-forest-600" />
-                          <span>{t('schemes_eligibility')}</span>
-                        </h4>
-                        <p className="text-xs text-earth-700 dark:text-cream-200 leading-relaxed">
+                  <div className="px-6 pb-6 pt-2 border-t border-white/10 space-y-4 animate-fade-in text-xs">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                      <div className="p-4 rounded-2xl bg-white/6 border border-white/10 space-y-1">
+                        <span className="font-bold text-[#5BA33C] block uppercase text-[10px]">
+                          Target Beneficiaries & Eligibility
+                        </span>
+                        <p className="text-white/90 leading-relaxed font-medium">
                           {isTamil ? scheme.eligibility_ta : scheme.eligibility_en}
                         </p>
                       </div>
 
-                      {/* Documents */}
-                      <div className="p-4 rounded-2xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-forest-800 dark:text-leaf-300 mb-1.5 flex items-center gap-1.5">
-                          <FileText className="w-4 h-4 text-amber-600" />
-                          <span>{t('schemes_documents')}</span>
-                        </h4>
-                        <p className="text-xs text-earth-700 dark:text-cream-200 leading-relaxed">
-                          {isTamil ? scheme.documents_ta : scheme.documents_en}
+                      <div className="p-4 rounded-2xl bg-white/6 border border-white/10 space-y-1">
+                        <span className="font-bold text-[#5BA33C] block uppercase text-[10px]">
+                          Required Application Documentation
+                        </span>
+                        <p className="text-white/90 leading-relaxed font-medium">
+                          {isTamil ? scheme.docs_ta : scheme.docs_en}
                         </p>
                       </div>
                     </div>
 
-                    {/* Official Link Button */}
-                    <div className="flex justify-end pt-2">
-                      <a
-                        href={scheme.official_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-forest-700 hover:bg-forest-800 shadow-soft transition-all"
-                      >
-                        <span>{t('schemes_apply_btn')}</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-[11px] text-[#D8C7AE]">
+                        Nodal Ministry: <strong className="text-white">{scheme.nodal_agency}</strong>
+                      </span>
 
+                      {scheme.portal_url && (
+                        <a
+                          href={scheme.portal_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold btn-glass-primary shadow-glass"
+                        >
+                          <span>Official Portal</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
             );
           })
         ) : (
-          <div className="p-12 text-center rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border">
-            <BookOpenCheck className="w-10 h-10 text-earth-400 dark:text-darkbg-muted mx-auto mb-3" />
-            <h3 className="text-base font-bold text-forest-950 dark:text-cream-50">
-              No matching schemes found
-            </h3>
-            <p className="text-xs text-earth-600 dark:text-darkbg-muted mt-1">
-              Try searching with another keyword or reset the category filter.
-            </p>
+          <div className="p-12 rounded-3xl glass-dark border border-white/14 text-center space-y-2">
+            <BookOpenCheck className="w-8 h-8 text-[#5BA33C] mx-auto" />
+            <h3 className="text-sm font-bold text-white">No Schemes Found</h3>
+            <p className="text-xs text-[#D8C7AE]">Try changing your search query or filter category.</p>
           </div>
         )}
       </div>

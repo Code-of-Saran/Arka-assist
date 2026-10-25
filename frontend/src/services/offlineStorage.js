@@ -3,14 +3,36 @@
  */
 
 const STORAGE_KEYS = {
+  PREDICTIONS: 'arka_assist_crop_history',
+  DISEASES: 'arka_assist_disease_history',
+  ACTIVITIES: 'arka_assist_recent_activities'
+};
+
+const LEGACY_KEYS = {
   PREDICTIONS: 'agrivision_crop_history',
   DISEASES: 'agrivision_disease_history',
   ACTIVITIES: 'agrivision_recent_activities'
 };
 
+const getMigratedItem = (key, legacyKey) => {
+  try {
+    const current = localStorage.getItem(key);
+    if (current) return current;
+    const legacy = localStorage.getItem(legacyKey);
+    if (legacy) {
+      localStorage.setItem(key, legacy);
+      localStorage.removeItem(legacyKey);
+      return legacy;
+    }
+  } catch (e) {
+    // Ignore storage errors
+  }
+  return null;
+};
+
 export const saveCropPredictionHistory = (prediction) => {
   try {
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEYS.PREDICTIONS) || '[]');
+    const existing = JSON.parse(getMigratedItem(STORAGE_KEYS.PREDICTIONS, LEGACY_KEYS.PREDICTIONS) || '[]');
     const record = {
       id: Date.now(),
       timestamp: new Date().toISOString(),
@@ -22,6 +44,7 @@ export const saveCropPredictionHistory = (prediction) => {
     };
     const updated = [record, ...existing].slice(0, 10);
     localStorage.setItem(STORAGE_KEYS.PREDICTIONS, JSON.stringify(updated));
+    localStorage.removeItem(LEGACY_KEYS.PREDICTIONS);
     
     // Also append to recent activities
     addRecentActivity({
@@ -38,7 +61,7 @@ export const saveCropPredictionHistory = (prediction) => {
 
 export const getCropPredictionHistory = () => {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.PREDICTIONS) || '[]');
+    return JSON.parse(getMigratedItem(STORAGE_KEYS.PREDICTIONS, LEGACY_KEYS.PREDICTIONS) || '[]');
   } catch (e) {
     return [];
   }
@@ -46,7 +69,7 @@ export const getCropPredictionHistory = () => {
 
 export const addRecentActivity = (activity) => {
   try {
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEYS.ACTIVITIES) || '[]');
+    const existing = JSON.parse(getMigratedItem(STORAGE_KEYS.ACTIVITIES, LEGACY_KEYS.ACTIVITIES) || '[]');
     const record = {
       id: Date.now(),
       ...activity,
@@ -54,6 +77,7 @@ export const addRecentActivity = (activity) => {
     };
     const updated = [record, ...existing].slice(0, 8);
     localStorage.setItem(STORAGE_KEYS.ACTIVITIES, JSON.stringify(updated));
+    localStorage.removeItem(LEGACY_KEYS.ACTIVITIES);
   } catch (e) {
     console.error('Failed to add recent activity', e);
   }
@@ -61,7 +85,7 @@ export const addRecentActivity = (activity) => {
 
 export const getRecentActivities = () => {
   try {
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEYS.ACTIVITIES) || '[]');
+    const existing = JSON.parse(getMigratedItem(STORAGE_KEYS.ACTIVITIES, LEGACY_KEYS.ACTIVITIES) || '[]');
     if (existing.length === 0) {
       return [
         {

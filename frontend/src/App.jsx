@@ -39,7 +39,7 @@ const OfflineNotificationBanner = () => {
   if (!isOffline) return null;
 
   return (
-    <div className="bg-amber-500/90 dark:bg-amber-600/90 text-amber-950 dark:text-white px-4 py-2 text-xs font-semibold flex items-center justify-center gap-2 shadow-sm transition-all animate-fade-in z-50">
+    <div className="bg-gradient-to-r from-sell to-sell-dark text-white px-4 py-2 text-xs font-semibold flex items-center justify-center gap-2 shadow-sm border-b border-sell-dark/20 transition-all animate-fade-in z-50">
       <WifiOff className="w-4 h-4 shrink-0" />
       <span>{t('offline_banner_text')}</span>
     </div>
@@ -58,7 +58,7 @@ const AppLayout = ({ children, isPublic = false }) => {
   const isLogin = location.pathname === '/login';
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F4] dark:bg-[#0B1610] text-[#271D15] dark:text-[#E8F0EA] transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-transparent text-white transition-colors duration-300">
       <OfflineNotificationBanner />
       <Navbar />
 
@@ -76,7 +76,7 @@ const AppLayout = ({ children, isPublic = false }) => {
           </motion.main>
         </AnimatePresence>
       ) : (
-        <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row">
+        <div className="flex-1 w-full flex flex-col lg:flex-row">
           <Sidebar />
           <AnimatePresence mode="wait">
             <motion.main
@@ -85,7 +85,7 @@ const AppLayout = ({ children, isPublic = false }) => {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0 overflow-y-auto"
+              className="flex-1 p-4 sm:p-6 lg:p-7 min-w-0 overflow-y-auto w-full"
             >
               {children}
             </motion.main>

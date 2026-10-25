@@ -80,7 +80,7 @@ def login():
         password = data.get("password", "").strip()
         is_demo = data.get("is_demo", False)
 
-        valid_passwords = ["agrivision", "arka-assist", "arkaassist"]
+        valid_passwords = ["arka-assist", "arkaassist"]
 
         if is_demo or (username.lower() == "farmer" and password.lower() in valid_passwords):
             return jsonify({
@@ -102,7 +102,7 @@ def login():
         else:
             return jsonify({
                 "success": False,
-                "error": "Invalid credentials. Use demo login or username: 'farmer', password: 'agrivision' / 'arka-assist'"
+                "error": "Invalid credentials. Use demo login or username: 'farmer', password: 'arka-assist'"
             }), 401
     except Exception as e:
         return jsonify({"success": False, "error": f"Login error: {str(e)}"}), 500
@@ -138,18 +138,30 @@ def recommend_crop():
 # 4. Disease Detection Endpoint (Simulated CV Analysis)
 # ----------------------------------------------------
 @app.route("/api/detect-disease", methods=["POST"])
+@app.route("/api/disease/analyze", methods=["POST"])
 def detect_disease():
     try:
+        image_bytes = None
         hint = ""
+
+        if "image" in request.files:
+            file_obj = request.files["image"]
+            if file_obj.filename:
+                image_bytes = file_obj.read()
+                hint = file_obj.filename
+        elif "file" in request.files:
+            file_obj = request.files["file"]
+            if file_obj.filename:
+                image_bytes = file_obj.read()
+                hint = file_obj.filename
+
         if request.form:
-            hint = request.form.get("hint", "")
-            if not hint and "image" in request.files:
-                hint = request.files["image"].filename
+            hint = request.form.get("hint", hint)
         elif request.is_json:
             data = request.get_json(silent=True) or {}
-            hint = data.get("hint", "")
+            hint = data.get("hint", hint)
 
-        result = disease_service.detect(hint)
+        result = disease_service.detect(image_input=image_bytes, filename_or_hint=hint)
         return jsonify(result), 200
     except Exception as e:
         return jsonify({"success": False, "error": f"Disease detection failed: {str(e)}"}), 500
@@ -228,20 +240,31 @@ def analyze_thermal():
         hint = ""
         ambient_temp = 28.5
         soil_moisture = 50.0
+        image_bytes = None
+
+        if "image" in request.files:
+            file_obj = request.files["image"]
+            if file_obj.filename:
+                image_bytes = file_obj.read()
+                hint = file_obj.filename
+        elif "file" in request.files:
+            file_obj = request.files["file"]
+            if file_obj.filename:
+                image_bytes = file_obj.read()
+                hint = file_obj.filename
 
         if request.form:
-            hint = request.form.get("hint", "")
+            hint = request.form.get("hint", hint)
             ambient_temp = float(request.form.get("ambient_temp", 28.5))
             soil_moisture = float(request.form.get("soil_moisture", 50.0))
-            if not hint and "image" in request.files:
-                hint = request.files["image"].filename
         elif request.is_json:
             data = request.get_json(silent=True) or {}
-            hint = data.get("hint", "")
+            hint = data.get("hint", hint)
             ambient_temp = float(data.get("ambient_temp", 28.5))
             soil_moisture = float(data.get("soil_moisture", 50.0))
 
         result = thermal_service.analyze(
+            image_data=image_bytes,
             preset_hint=hint,
             ambient_temp=ambient_temp,
             soil_moisture=soil_moisture

@@ -9,17 +9,12 @@ import {
   Sprout,
   RotateCcw,
   Sparkles,
-  CheckCircle2,
   Droplets,
   Clock,
   Layers,
-  Thermometer,
-  CloudRain,
-  HelpCircle,
-  ArrowRight,
-  TrendingUp,
   Cpu,
-  Loader2
+  Loader2,
+  ArrowRight
 } from 'lucide-react';
 
 const PRESETS = {
@@ -44,7 +39,6 @@ const CropRecommendation = () => {
   const { t, language } = useLanguage();
   const isTamil = language === 'ta';
 
-  // Input states with realistic defaults
   const [formData, setFormData] = useState({
     n: 80,
     p: 48,
@@ -98,7 +92,6 @@ const CropRecommendation = () => {
     setLoading(true);
     setError('');
     
-    // Multi-step loading state sequence
     setLoadingStep(isTamil ? 'மண் N-P-K அளவுகளை சரிபார்க்கிறது...' : 'Analyzing soil N-P-K parameters...');
     setTimeout(() => {
       setLoadingStep(isTamil ? 'வானிலை & மழைப்பொழிவு ஒப்பிடுகிறது...' : 'Comparing rainfall & climate conditions...');
@@ -130,54 +123,54 @@ const CropRecommendation = () => {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in-up">
+    <div className="space-y-6 animate-fade-in-up">
       
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white shadow-xl min-h-[180px] flex flex-col justify-center">
+      {/* Header Banner */}
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white shadow-2xl min-h-[170px] flex flex-col justify-center border border-white/18">
         <img
-          src="/assets/images/crop-fields.jpg"
-          alt="Lush Crop Fields"
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.85] contrast-[1.05]"
+          src="/assets/images/soil-sprout.jpg"
+          alt="Soil & Sprout Agronomy"
+          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.38] contrast-[1.15] scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest-950/95 via-forest-950/85 to-forest-950/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F3D25]/95 via-[#0B6623]/85 to-[#0F3D25]/75 z-10 pointer-events-none" />
 
         <div className="relative z-20 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-leaf-500/30 text-leaf-300 text-xs font-bold border border-leaf-500/40 backdrop-blur-md mb-2">
-              <Cpu className="w-4 h-4" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold border border-white/25 backdrop-blur-md mb-2 shadow-xs">
+              <Cpu className="w-3.5 h-3.5 text-[#5BA33C]" />
               <span>Machine Learning Crop Matcher</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-md">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-md">
               {t('crop_rec_title')}
             </h1>
-            <p className="text-xs sm:text-sm text-cream-100/90 mt-1 max-w-2xl font-medium">
+            <p className="text-xs sm:text-sm text-white/85 mt-1 max-w-2xl font-medium leading-relaxed">
               {t('crop_rec_subtitle')}
             </p>
           </div>
 
           {/* Quick Presets */}
           <div className="flex flex-wrap items-center gap-2 z-20">
-            <span className="text-xs font-bold text-cream-200 mr-1">
+            <span className="text-xs font-bold text-[#D8C7AE] mr-1">
               Presets:
             </span>
             <button
               type="button"
               onClick={() => applyPreset('rice')}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white/20 hover:bg-white/30 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/12 hover:bg-white/22 text-white border border-white/20 transition-all cursor-pointer shadow-xs"
             >
               🌾 {t('crop_btn_preset_rice')}
             </button>
             <button
               type="button"
               onClick={() => applyPreset('cotton')}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white/20 hover:bg-white/30 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/12 hover:bg-white/22 text-white border border-white/20 transition-all cursor-pointer shadow-xs"
             >
               🌱 {t('crop_btn_preset_cotton')}
             </button>
             <button
               type="button"
               onClick={() => applyPreset('fruits')}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white/20 hover:bg-white/30 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/12 hover:bg-white/22 text-white border border-white/20 transition-all cursor-pointer shadow-xs"
             >
               🍇 {t('crop_btn_preset_fruits')}
             </button>
@@ -186,30 +179,36 @@ const CropRecommendation = () => {
       </div>
 
       {/* Main Grid: Form Inputs (Left) & Results (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Form Inputs (Left 5 Cols) */}
         <div className="lg:col-span-5">
-          <form onSubmit={handlePredict} className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-cream-200 dark:border-darkbg-border">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-earth-800 dark:text-cream-100">
+          <form onSubmit={handlePredict} className="p-6 rounded-3xl glass-dark border border-white/14 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <h2 className="text-xs font-black uppercase tracking-wider text-white">
                 Soil & Environmental Metrics
               </h2>
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs text-earth-600 dark:text-darkbg-muted hover:text-earth-900 dark:hover:text-cream-100 flex items-center gap-1 font-semibold"
+                className="text-xs text-[#D8C7AE] hover:text-white flex items-center gap-1 font-bold transition-colors cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5 text-[#5BA33C]" />
                 <span>Reset</span>
               </button>
             </div>
 
+            {error && (
+              <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs font-bold">
+                {error}
+              </div>
+            )}
+
             {/* Nitrogen */}
             <div>
               <div className="flex justify-between text-xs font-bold mb-1">
-                <label className="text-earth-800 dark:text-cream-100">{t('crop_form_nitrogen')}</label>
-                <span className="font-mono text-forest-700 dark:text-leaf-300 font-bold">{formData.n} mg/kg</span>
+                <label className="text-white">{t('crop_form_nitrogen')}</label>
+                <span className="font-mono text-[#5BA33C] font-black">{formData.n} mg/kg</span>
               </div>
               <input
                 type="range"
@@ -218,15 +217,15 @@ const CropRecommendation = () => {
                 step="1"
                 value={formData.n}
                 onChange={(e) => handleChange('n', e.target.value)}
-                className="w-full accent-forest-600 h-2.5 bg-cream-200 dark:bg-darkbg-surface rounded-lg cursor-pointer"
+                className="w-full accent-[#5BA33C] h-2 bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
 
             {/* Phosphorus */}
             <div>
               <div className="flex justify-between text-xs font-bold mb-1">
-                <label className="text-earth-800 dark:text-cream-100">{t('crop_form_phosphorus')}</label>
-                <span className="font-mono text-forest-700 dark:text-leaf-300 font-bold">{formData.p} mg/kg</span>
+                <label className="text-white">{t('crop_form_phosphorus')}</label>
+                <span className="font-mono text-[#5BA33C] font-black">{formData.p} mg/kg</span>
               </div>
               <input
                 type="range"
@@ -235,15 +234,15 @@ const CropRecommendation = () => {
                 step="1"
                 value={formData.p}
                 onChange={(e) => handleChange('p', e.target.value)}
-                className="w-full accent-forest-600 h-2.5 bg-cream-200 dark:bg-darkbg-surface rounded-lg cursor-pointer"
+                className="w-full accent-[#4F8F5B] h-2 bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
 
             {/* Potassium */}
             <div>
               <div className="flex justify-between text-xs font-bold mb-1">
-                <label className="text-earth-800 dark:text-cream-100">{t('crop_form_potassium')}</label>
-                <span className="font-mono text-forest-700 dark:text-leaf-300 font-bold">{formData.k} mg/kg</span>
+                <label className="text-white">{t('crop_form_potassium')}</label>
+                <span className="font-mono text-[#5BA33C] font-black">{formData.k} mg/kg</span>
               </div>
               <input
                 type="range"
@@ -252,15 +251,15 @@ const CropRecommendation = () => {
                 step="1"
                 value={formData.k}
                 onChange={(e) => handleChange('k', e.target.value)}
-                className="w-full accent-forest-600 h-2.5 bg-cream-200 dark:bg-darkbg-surface rounded-lg cursor-pointer"
+                className="w-full accent-[#B8A77A] h-2 bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
 
             {/* Grid for Temp, Humidity, pH, Rainfall */}
-            <div className="grid grid-cols-2 gap-4 pt-2 border-t border-cream-200 dark:border-darkbg-border">
+            <div className="grid grid-cols-2 gap-3 pt-2 border-t border-white/10">
               {/* Temp */}
               <div>
-                <label className="block text-[11px] font-bold text-earth-800 dark:text-cream-100 mb-1">
+                <label className="block text-[11px] font-bold text-[#D8C7AE] mb-1">
                   {t('crop_form_temp')}
                 </label>
                 <input
@@ -270,13 +269,13 @@ const CropRecommendation = () => {
                   max="48"
                   value={formData.temperature}
                   onChange={(e) => handleChange('temperature', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-mono font-bold"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-black/40 border border-white/20 font-mono font-bold text-white outline-none focus:border-[#5BA33C]"
                 />
               </div>
 
               {/* Humidity */}
               <div>
-                <label className="block text-[11px] font-bold text-earth-800 dark:text-cream-100 mb-1">
+                <label className="block text-[11px] font-bold text-[#D8C7AE] mb-1">
                   {t('crop_form_humidity')}
                 </label>
                 <input
@@ -286,13 +285,13 @@ const CropRecommendation = () => {
                   max="100"
                   value={formData.humidity}
                   onChange={(e) => handleChange('humidity', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-mono font-bold"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-black/40 border border-white/20 font-mono font-bold text-white outline-none focus:border-[#5BA33C]"
                 />
               </div>
 
               {/* pH */}
               <div>
-                <label className="block text-[11px] font-bold text-earth-800 dark:text-cream-100 mb-1">
+                <label className="block text-[11px] font-bold text-[#D8C7AE] mb-1">
                   {t('crop_form_ph')}
                 </label>
                 <input
@@ -302,13 +301,13 @@ const CropRecommendation = () => {
                   max="9.5"
                   value={formData.ph}
                   onChange={(e) => handleChange('ph', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-mono font-bold"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-black/40 border border-white/20 font-mono font-bold text-white outline-none focus:border-[#5BA33C]"
                 />
               </div>
 
               {/* Rainfall */}
               <div>
-                <label className="block text-[11px] font-bold text-earth-800 dark:text-cream-100 mb-1">
+                <label className="block text-[11px] font-bold text-[#D8C7AE] mb-1">
                   {t('crop_form_rainfall')}
                 </label>
                 <input
@@ -318,7 +317,7 @@ const CropRecommendation = () => {
                   max="350"
                   value={formData.rainfall}
                   onChange={(e) => handleChange('rainfall', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-mono font-bold"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-black/40 border border-white/20 font-mono font-bold text-white outline-none focus:border-[#5BA33C]"
                 />
               </div>
             </div>
@@ -327,7 +326,7 @@ const CropRecommendation = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn-agro-primary w-full py-3.5 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              className="w-full py-3.5 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer btn-glass-primary shadow-glass hover:scale-[1.01] active:scale-95 transition-all text-white"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -336,9 +335,9 @@ const CropRecommendation = () => {
                 </span>
               ) : (
                 <>
-                  <Sprout className="w-4 h-4" />
+                  <Sprout className="w-4 h-4 text-white" />
                   <span>{t('crop_btn_predict')}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-white" />
                 </>
               )}
             </button>
@@ -346,47 +345,45 @@ const CropRecommendation = () => {
         </div>
 
         {/* Results Panel (Right 7 Cols) */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 space-y-5">
           
           {loading ? (
-            /* Animated Loading State */
-            <div className="h-full min-h-[420px] rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft flex flex-col items-center justify-center p-8 text-center space-y-4 animate-pulse">
-              <div className="w-16 h-16 rounded-full bg-forest-100 dark:bg-darkbg-surface flex items-center justify-center text-forest-600 dark:text-leaf-400">
+            <div className="h-full min-h-[420px] rounded-3xl glass-dark border border-white/14 flex flex-col items-center justify-center p-8 text-center space-y-4 animate-pulse">
+              <div className="w-16 h-16 rounded-full bg-[#0B6623]/25 border border-[#5BA33C]/30 flex items-center justify-center text-[#5BA33C]">
                 <Loader2 className="w-8 h-8 animate-spin" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-forest-950 dark:text-cream-50">
+                <h3 className="text-base font-bold text-white">
                   {isTamil ? 'பயிரை கணக்கிடுகிறது...' : 'Matching Crop Characteristics...'}
                 </h3>
-                <p className="text-xs text-earth-600 dark:text-darkbg-muted mt-1">{loadingStep}</p>
+                <p className="text-xs text-[#D8C7AE] mt-1">{loadingStep}</p>
               </div>
             </div>
           ) : result ? (
-            <div className="space-y-6 animate-fade-in-up">
+            <div className="space-y-5 animate-fade-in-up">
               
               {/* Top Result Card */}
-              <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft">
+              <div className="p-6 rounded-3xl glass-dark border border-white/14 space-y-5">
                 
                 {/* Result Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-cream-200 dark:border-darkbg-border">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-forest-600 to-leaf-500 flex items-center justify-center text-3xl shadow-glow-green text-white">
+                    <div className="w-16 h-16 rounded-2xl bg-[#0B6623]/25 border border-[#5BA33C]/35 flex items-center justify-center text-3xl shadow-glass text-white">
                       🌾
                     </div>
                     <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-earth-600 dark:text-darkbg-muted">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#D8C7AE]">
                         {t('crop_result_title')}
                       </span>
-                      <h2 className="text-2xl sm:text-3xl font-black text-forest-950 dark:text-cream-50">
+                      <h2 className="text-2xl sm:text-3xl font-black text-white">
                         {isTamil ? result.crop_name_ta : result.crop_name_en}
                       </h2>
-                      <span className="inline-block mt-0.5 px-3 py-0.5 rounded-full text-xs font-bold bg-leaf-100 dark:bg-darkbg-surface text-leaf-800 dark:text-leaf-300 border border-leaf-300 dark:border-darkbg-border">
+                      <span className="inline-block mt-0.5 px-3 py-0.5 rounded-full text-xs font-bold bg-[#0B6623]/35 text-[#5BA33C] border border-[#5BA33C]/40">
                         {result.category}
                       </span>
                     </div>
                   </div>
 
-                  {/* SVG Confidence Gauge */}
                   <ConfidenceGauge
                     value={result.confidence}
                     size={140}
@@ -395,45 +392,45 @@ const CropRecommendation = () => {
                 </div>
 
                 {/* Agronomic Specifications Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-5">
-                  <div className="p-3.5 rounded-2xl bg-cream-50 dark:bg-darkbg-surface border border-cream-200/80 dark:border-darkbg-border">
-                    <div className="flex items-center gap-1.5 text-xs text-earth-600 dark:text-darkbg-muted mb-0.5 font-medium">
-                      <Layers className="w-3.5 h-3.5 text-forest-600" />
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-4">
+                  <div className="p-3.5 rounded-2xl bg-white/6 border border-white/10">
+                    <div className="flex items-center gap-1.5 text-xs text-[#D8C7AE] mb-0.5 font-bold">
+                      <Layers className="w-3.5 h-3.5 text-[#5BA33C]" />
                       <span>{t('crop_result_soil')}</span>
                     </div>
-                    <div className="text-xs font-bold text-forest-950 dark:text-cream-50">
+                    <div className="text-xs font-bold text-white">
                       {result.soil_type}
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-cream-50 dark:bg-darkbg-surface border border-cream-200/80 dark:border-darkbg-border">
-                    <div className="flex items-center gap-1.5 text-xs text-earth-600 dark:text-darkbg-muted mb-0.5 font-medium">
-                      <Clock className="w-3.5 h-3.5 text-leaf-600" />
+                  <div className="p-3.5 rounded-2xl bg-white/6 border border-white/10">
+                    <div className="flex items-center gap-1.5 text-xs text-[#D8C7AE] mb-0.5 font-bold">
+                      <Clock className="w-3.5 h-3.5 text-[#5BA33C]" />
                       <span>{t('crop_result_duration')}</span>
                     </div>
-                    <div className="text-xs font-bold text-forest-950 dark:text-cream-50">
+                    <div className="text-xs font-bold text-white">
                       {result.growth_duration}
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-cream-50 dark:bg-darkbg-surface border border-cream-200/80 dark:border-darkbg-border col-span-2 sm:col-span-1">
-                    <div className="flex items-center gap-1.5 text-xs text-earth-600 dark:text-darkbg-muted mb-0.5 font-medium">
-                      <Droplets className="w-3.5 h-3.5 text-sky-500" />
+                  <div className="p-3.5 rounded-2xl bg-white/6 border border-white/10 col-span-2 sm:col-span-1">
+                    <div className="flex items-center gap-1.5 text-xs text-[#D8C7AE] mb-0.5 font-bold">
+                      <Droplets className="w-3.5 h-3.5 text-[#38BDF8]" />
                       <span>{t('crop_result_water')}</span>
                     </div>
-                    <div className="text-xs font-bold text-forest-950 dark:text-cream-50">
+                    <div className="text-xs font-bold text-white">
                       {result.water_requirement}
                     </div>
                   </div>
                 </div>
 
                 {/* Cultivation Advice */}
-                <div className="p-4 rounded-2xl bg-forest-50/80 dark:bg-darkbg-surface border border-forest-200/80 dark:border-darkbg-border">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-forest-900 dark:text-leaf-300 mb-1.5 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-leaf-600" />
+                <div className="p-4 rounded-2xl glass-green border border-[#5BA33C]/35">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-[#5BA33C]" />
                     <span>{t('crop_result_advice')}</span>
                   </h4>
-                  <p className="text-xs sm:text-sm text-earth-800 dark:text-cream-200/90 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-medium">
                     {isTamil ? result.advice_ta : result.advice_en}
                   </p>
                 </div>
@@ -442,30 +439,32 @@ const CropRecommendation = () => {
 
               {/* Diagrammatic Factor Matching Radar/Bar Matrix */}
               {result.factors && (
-                <FactorRadar factors={result.factors} />
+                <div className="glass-dark p-6 rounded-3xl border border-white/14">
+                  <FactorRadar factors={result.factors} />
+                </div>
               )}
 
               {/* Alternative Crops List */}
               {result.alternatives && result.alternatives.length > 0 && (
-                <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-earth-700 dark:text-darkbg-muted mb-3">
+                <div className="p-6 rounded-3xl glass-dark border border-white/14 shadow-glass space-y-3">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-white">
                     {t('crop_result_alternatives')}
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {result.alternatives.map((alt, idx) => (
                       <div
                         key={idx}
-                        className="p-3.5 rounded-2xl bg-cream-50 dark:bg-darkbg-surface border border-cream-200/80 dark:border-darkbg-border flex items-center justify-between"
+                        className="p-3.5 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-between"
                       >
                         <div>
-                          <div className="text-xs font-bold text-forest-950 dark:text-cream-50">
+                          <div className="text-xs font-bold text-white">
                             {isTamil ? alt.name_ta : alt.name_en}
                           </div>
-                          <div className="text-[11px] text-earth-600 dark:text-darkbg-muted">
+                          <div className="text-[11px] font-semibold text-[#5BA33C]">
                             {alt.category}
                           </div>
                         </div>
-                        <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-cream-200 dark:bg-darkbg-border text-earth-800 dark:text-cream-100">
+                        <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#0B6623]/35 text-[#5BA33C] border border-[#5BA33C]/40">
                           {alt.confidence}% match
                         </span>
                       </div>
@@ -476,15 +475,14 @@ const CropRecommendation = () => {
 
             </div>
           ) : (
-            /* Empty state placeholder before prediction */
-            <div className="h-full min-h-[420px] rounded-3xl bg-white/60 dark:bg-darkbg-card/60 border border-dashed border-cream-300 dark:border-darkbg-border flex flex-col items-center justify-center p-8 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-cream-100 dark:bg-darkbg-surface flex items-center justify-center text-earth-500 dark:text-darkbg-muted mb-4 shadow-inner">
-                <Sprout className="w-8 h-8 text-leaf-600" />
+            <div className="h-full min-h-[420px] rounded-3xl glass-dark border border-dashed border-white/16 flex flex-col items-center justify-center p-8 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-[#0B6623]/25 border border-[#5BA33C]/35 flex items-center justify-center text-[#5BA33C] mb-4 shadow-glass">
+                <Sprout className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-forest-950 dark:text-cream-50 mb-1">
+              <h3 className="text-lg font-black text-white mb-1">
                 {isTamil ? 'பரிந்துரை முடிவுகள் இங்கே தோன்றும்' : 'Ready for Agronomic Soil Match'}
               </h3>
-              <p className="text-xs sm:text-sm text-earth-600 dark:text-darkbg-muted max-w-sm">
+              <p className="text-xs sm:text-sm text-[#D8C7AE] max-w-sm font-medium">
                 {isTamil
                   ? 'மண் சத்துக்களை உள்ளிட்டு "பயிர் பரிந்துரை செய்" பொத்தானை அழுத்தவும்.'
                   : 'Adjust soil NPK and climate sliders on the left or select a preset, then click recommend to generate full agronomic analysis.'}
@@ -501,4 +499,3 @@ const CropRecommendation = () => {
 };
 
 export default CropRecommendation;
-

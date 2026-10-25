@@ -43,7 +43,7 @@ An offline-first, multilingual, multimodal AI-driven digital agriculture intelli
 ## 📁 Folder Structure
 
 ```
-AgriVision/
+Arka-assist/
 ├── index.py                      # Single-file master entrypoint (python index.py)
 ├── index.js                      # Node.js single-file launcher (node index.js / npm start)
 ├── run.bat                       # Windows 1-click double-clickable launcher
@@ -195,7 +195,7 @@ python start_dev.py
 
 ## 🔑 Demo Credentials
 - **Username**: `farmer`
-- **Password**: `arka-assist` (also accepts `agrivision` for backward compatibility)
+- **Password**: `arka-assist`
 - *Or click the instant "Demo Login (One-Click)" button on the login page.*
 
 ---

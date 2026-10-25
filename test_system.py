@@ -70,10 +70,10 @@ def test_backend_api():
     assert status == 200 and res["success"] and "VSBCETC" in res["user"]["name"]
     print(f"  [PASS] /api/auth/login (password: 'arka-assist') -> authenticated as '{res['user']['name']}'")
 
-    # Auth Demo Login (with backward-compatible 'agrivision' password)
-    status, res = make_request("http://127.0.0.1:5000/api/auth/login", "POST", {"username": "farmer", "password": "agrivision"})
+    # Auth Demo Login (with alternative 'arkaassist' password)
+    status, res = make_request("http://127.0.0.1:5000/api/auth/login", "POST", {"username": "farmer", "password": "arkaassist"})
     assert status == 200 and res["success"]
-    print(f"  [PASS] /api/auth/login (password: 'agrivision' backward compatibility) -> authenticated")
+    print(f"  [PASS] /api/auth/login (password: 'arkaassist') -> authenticated")
 
     # Crop Recommendation (Sample 1 - Rice)
     status, res1 = make_request("http://127.0.0.1:5000/api/recommend-crop", "POST", {

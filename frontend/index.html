@@ -19,17 +19,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#FBF9F4] dark:bg-[#0B1610] text-[#271D15] dark:text-[#E8F0EA] antialiased transition-colors duration-300 min-h-screen selection:bg-forest-500 selection:text-white">
+  <body class="bg-[#FBF9F4] dark:bg-[#0B1610] text-[#271D15] dark:text-[#F0F7F2] antialiased transition-colors duration-300 min-h-screen selection:bg-forest-500 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      // Register Service Worker for offline PWA functionality
+      // Service Worker & Cache Management
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('[AgriVision PWA] Service Worker registered with scope:', reg.scope))
-            .catch(err => console.log('[AgriVision PWA] Service Worker registration failed:', err));
-        });
+        const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+        // Always clean up any stale legacy caches (such as old AgriVision caches)
+        if ('caches' in window) {
+          caches.keys().then((keys) => {
+            keys.forEach((key) => {
+              if (key.includes('agrivision') || (isDev && key.includes('arka-assist'))) {
+                caches.delete(key).then(() => {
+                  console.log('[Arka-assist] Purged stale cache:', key);
+                });
+              }
+            });
+          });
+        }
+
+        if (isDev) {
+          // In development, unregister any active service worker to avoid stale caching during HMR / refresh
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            for (const registration of registrations) {
+              registration.unregister().then((unregistered) => {
+                if (unregistered) {
+                  console.log('[Arka-assist Dev] Unregistered stale service worker');
+                }
+              });
+            }
+          });
+        } else {
+          // In production, register PWA service worker
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+              .then((reg) => console.log('[Arka-assist PWA] Service Worker registered with scope:', reg.scope))
+              .catch((err) => console.warn('[Arka-assist PWA] Service Worker registration failed:', err));
+          });
+        }
       }
     </script>
   </body>

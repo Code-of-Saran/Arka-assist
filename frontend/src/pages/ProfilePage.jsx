@@ -4,15 +4,12 @@ import { useAuth } from '../context/AuthContext';
 import {
   User,
   MapPin,
-  Globe,
   Sprout,
   Maximize2,
   Layers,
   Droplets,
   Save,
   CheckCircle2,
-  ShieldCheck,
-  Sparkles,
   RotateCcw
 } from 'lucide-react';
 
@@ -96,100 +93,102 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
       
       {/* Header */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft">
-        <div className="flex items-center gap-2 text-xs font-bold text-forest-700 dark:text-leaf-400 uppercase tracking-wider mb-1">
-          <User className="w-4 h-4" />
-          <span>Farmer Profile & Specifications</span>
+      <div className="glass-light p-6 rounded-3xl relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#0B6623] uppercase tracking-wider mb-1">
+            <User className="w-4 h-4 text-[#0B6623]" />
+            <span>Farmer Profile & Specifications</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#17351F] tracking-tight">
+            {t('profile_title')}
+          </h1>
+          <p className="text-xs sm:text-sm text-[#4A3A30] mt-1 font-medium">
+            {t('profile_subtitle')}
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-forest-950 dark:text-cream-50 tracking-tight">
-          {t('profile_title')}
-        </h1>
-        <p className="text-xs sm:text-sm text-earth-700 dark:text-cream-200/80 mt-1">
-          {t('profile_subtitle')}
-        </p>
       </div>
 
       {/* Save Success Alert */}
       {savedAlert && (
-        <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm flex items-center gap-3 shadow-soft animate-fade-in">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          <span className="font-bold">{t('profile_saved_alert')}</span>
+        <div className="p-4 rounded-2xl bg-[#0B6623]/15 border border-[#0B6623]/35 text-[#0B6623] text-xs sm:text-sm flex items-center gap-3 shadow-glass animate-fade-in backdrop-blur-md">
+          <CheckCircle2 className="w-5 h-5 text-[#0B6623] shrink-0" />
+          <span className="font-bold text-[#0B6623]">{t('profile_saved_alert')}</span>
         </div>
       )}
 
       {/* Profile Form */}
-      <form onSubmit={handleSubmit} className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-darkbg-card border border-cream-300 dark:border-darkbg-border shadow-soft space-y-6">
+      <form onSubmit={handleSubmit} className="glass-light p-6 sm:p-8 rounded-3xl space-y-6">
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           
           {/* Farmer Name */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_name')}
             </label>
             <div className="relative">
-              <User className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <User className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] transition-all"
               />
             </div>
           </div>
 
           {/* Location */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_location')}
             </label>
             <div className="relative">
-              <MapPin className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <MapPin className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] transition-all"
               />
             </div>
           </div>
 
           {/* Farm Size */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_farm_size')}
             </label>
             <div className="relative">
-              <Maximize2 className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <Maximize2 className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 value={formData.farm_size}
                 onChange={(e) => setFormData({ ...formData, farm_size: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] transition-all"
               />
             </div>
           </div>
 
           {/* Dominant Soil Type */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_soil_type')}
             </label>
             <div className="relative">
-              <Layers className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <Layers className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <select
                 value={formData.soil_type}
                 onChange={(e) => setFormData({ ...formData, soil_type: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500 cursor-pointer"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] cursor-pointer outline-none"
               >
                 {SOIL_TYPES.map((soil) => (
-                  <option key={soil} value={soil}>{soil}</option>
+                  <option key={soil} value={soil} className="bg-[#765341] text-white">{soil}</option>
                 ))}
               </select>
             </div>
@@ -197,18 +196,18 @@ const ProfilePage = () => {
 
           {/* Primary Crop */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_primary_crop')}
             </label>
             <div className="relative">
-              <Sprout className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <Sprout className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <select
                 value={formData.primary_crop}
                 onChange={(e) => setFormData({ ...formData, primary_crop: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500 cursor-pointer"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] cursor-pointer outline-none"
               >
                 {CROPS_LIST.map((crop) => (
-                  <option key={crop} value={crop}>{crop}</option>
+                  <option key={crop} value={crop} className="bg-[#765341] text-white">{crop}</option>
                 ))}
               </select>
             </div>
@@ -216,18 +215,18 @@ const ProfilePage = () => {
 
           {/* Irrigation Method */}
           <div>
-            <label className="block text-xs font-bold text-earth-800 dark:text-cream-100 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#17351F] uppercase tracking-wider mb-2">
               {t('profile_irrigation')}
             </label>
             <div className="relative">
-              <Droplets className="w-4 h-4 text-earth-500 dark:text-darkbg-muted absolute left-3.5 top-3.5" />
+              <Droplets className="w-4 h-4 text-[#0B6623] absolute left-3.5 top-3.5" />
               <select
                 value={formData.irrigation}
                 onChange={(e) => setFormData({ ...formData, irrigation: e.target.value })}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-cream-50 dark:bg-darkbg-surface border border-cream-300 dark:border-darkbg-border text-earth-900 dark:text-cream-50 font-medium focus:outline-none focus:ring-2 focus:ring-forest-500 cursor-pointer"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl text-sm glass-input-light text-[#17351F] font-bold focus:outline-none focus:border-[#0B6623] cursor-pointer outline-none"
               >
                 {IRRIGATION_TYPES.map((irr) => (
-                  <option key={irr} value={irr}>{irr}</option>
+                  <option key={irr} value={irr} className="bg-[#765341] text-white">{irr}</option>
                 ))}
               </select>
             </div>
@@ -236,20 +235,20 @@ const ProfilePage = () => {
         </div>
 
         {/* Actions CTA */}
-        <div className="pt-4 border-t border-cream-200 dark:border-darkbg-border flex items-center justify-between">
+        <div className="pt-4 border-t border-[#765341]/15 flex items-center justify-between">
           <button
             type="button"
             onClick={handleReset}
-            className="px-4 py-2.5 rounded-xl font-semibold text-earth-700 dark:text-cream-200 bg-cream-200/80 dark:bg-darkbg-surface hover:bg-cream-300 dark:hover:bg-darkbg-border border border-cream-300 dark:border-darkbg-border transition-all text-xs flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-2xl font-bold btn-glass-secondary text-[#5F5148] hover:text-[#17351F] transition-all text-xs flex items-center gap-1.5 cursor-pointer"
             title="Reset to default details (VSBCETC [CSE PROJECT])"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5 text-[#0B6623]" />
             <span>Reset to Default</span>
           </button>
 
           <button
             type="submit"
-            className="px-6 py-3 rounded-xl font-bold text-white bg-forest-700 hover:bg-forest-800 shadow-soft transition-all text-sm flex items-center gap-2"
+            className="px-6 py-3 rounded-2xl font-bold text-white btn-glass-primary shadow-glass transition-all text-sm flex items-center gap-2 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>{t('profile_save_btn')}</span>

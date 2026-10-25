@@ -1,40 +1,40 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Sprout, Heart, Shield, Award } from 'lucide-react';
+import { Sprout, Shield, Award } from 'lucide-react';
 
 const Footer = () => {
   const { language } = useLanguage();
   const isTamil = language === 'ta';
 
   return (
-    <footer className="w-full bg-cream-100 dark:bg-darkbg-base border-t border-cream-300 dark:border-darkbg-border mt-auto py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-earth-600 dark:text-darkbg-muted">
+    <footer className="w-full glass-dark border-t border-white/10 mt-auto py-6 text-xs text-white/70">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-forest-600 flex items-center justify-center text-white">
+            <div className="w-6 h-6 rounded-lg bg-[#0B6623] text-white flex items-center justify-center shadow-sm">
               <Sprout className="w-3.5 h-3.5" />
             </div>
-            <span className="font-bold text-forest-900 dark:text-cream-100">
-              ARKA-ASSIST
+            <span className="font-black text-white tracking-tight font-mono">
+              ARKA<span className="text-[#5BA33C] font-black">—ASSIST</span>
             </span>
-            <span>—</span>
-            <span>{isTamil ? 'பல்நோக்கு AI விவசாய வழிகாட்டுதல் தளம்' : 'A Multimodal AI-Based Farm Intelligence and Decision Support System'}</span>
+            <span className="text-white/40">—</span>
+            <span className="text-[#D8C7AE] text-[11px]">{isTamil ? 'பல்நோக்கு AI விவசாய வழிகாட்டுதல் தளம்' : 'Autonomous Multimodal Farm Decision Support System'}</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1">
-              <Shield className="w-3.5 h-3.5 text-forest-600 dark:text-leaf-400" />
-              <span>100% Offline-First Architecture</span>
+          <div className="flex items-center gap-6 text-[11px]">
+            <span className="flex items-center gap-1.5 text-[#5BA33C]">
+              <Shield className="w-3.5 h-3.5" />
+              <span className="text-white/90 font-medium">100% Offline-First Architecture</span>
             </span>
-            <span className="flex items-center gap-1">
-              <Award className="w-3.5 h-3.5 text-amber-500" />
-              <span>Agronomic Decision Support</span>
+            <span className="flex items-center gap-1.5 text-[#D8C7AE]">
+              <Award className="w-3.5 h-3.5 text-[#B8A77A]" />
+              <span className="text-white/90 font-medium">Agronomic Decision Support</span>
             </span>
           </div>
 
-          <div className="text-center md:text-right">
-            <span>© 2026 Arka-assist. {isTamil ? 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.' : 'A Multimodal AI-Based Farm Intelligence and Decision Support System.'}</span>
+          <div className="text-center md:text-right text-white/50 text-[11px]">
+            <span>© 2026 Arka-assist. {isTamil ? 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.' : 'All rights reserved.'}</span>
           </div>
 
         </div>

@@ -1,5 +1,5 @@
 """
-AGRI VISION - Unified System Runner
+ARKA-ASSIST - Unified System Runner
 Starts both Flask Backend (Port 5000) and Vite Frontend (Port 5173) simultaneously.
 """
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     print("🚀 ARKA-ASSIST IS RUNNING!")
     print("👉 Frontend: http://localhost:5173")
     print("👉 Backend API: http://127.0.0.1:5000")
-    print("👉 Demo Login: User: 'farmer' | Pass: 'arka-assist' (or 'agrivision')")
+    print("👉 Demo Login: User: 'farmer' | Pass: 'arka-assist'")
     print("=" * 60)
     print("Press Ctrl+C to stop all services.\n")
 

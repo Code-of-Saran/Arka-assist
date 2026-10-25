@@ -23,6 +23,18 @@ FARMER_CONTEXT = {
 
 CHATBOT_KB = [
     {
+        "keywords": ["பிரச்சனை", "பயிருக்கு என்ன பிரச்சனை", "பயிர் பிரச்சனை", "நோய்", "crop problem", "crop issue", "problem with my crop"],
+        "answer_en": "I am analyzing your crop condition. Field 4 (Tomato) shows mild thermal stress with canopy temperature at 32.8°C, while Field 1 (Paddy) is in optimal condition at 88% health.",
+        "answer_ta": "உங்கள் பயிர் நிலைமையை நான் பகுப்பாய்வு செய்கிறேன். நிலம் 4-ல் (தக்காளி) 32.8°C வரை லேசான வெப்ப அழுத்தமும், நிலம் 1-ல் (நெல்) 88% சிறந்த ஆரோக்கியமும் உள்ளது.",
+        "suggested_actions": ["Review Crop Health", "Run Thermal Scan", "Check Disease Detection"]
+    },
+    {
+        "keywords": ["உரம்", "உரத்தை", "உர பரிந்துரை", "fertilizer", "fertiliser", "nutrient recommendation", "fertilizer for my crop"],
+        "answer_en": "Fertilizer recommendation: Based on your soil telemetry (Clay Loam: N:80, P:48, K:40), balanced NPK fertilizer with 1% Urea foliar spray is recommended to maintain vegetative vigor and address localized nitrogen deficit.",
+        "answer_ta": "உங்கள் பயிருக்கு ஏற்ற உரப் பரிந்துரை: மண் பரிசோதனை முடிவுகளின்படி (N:80, P:48, K:40), சரிவிகித NPK உரம் மற்றும் தழைச்சத்து குறைபாட்டை போக்க 1% யூரியா இலைவழி தெளிப்பு பரிந்துரைக்கப்படுகிறது.",
+        "suggested_actions": ["Check Soil NPK Telemetry", "View Crop Recommendation"]
+    },
+    {
         "keywords": ["tomato", "tomato leaves", "leaves weak", "தக்காளி", "இலைகள் வாடல்", "தக்காளி பயிர்"],
         "answer_en": "Your latest crop analysis shows mild stress in **Field 4 (Tomato)**. Thermal readings indicate higher-than-normal canopy temperature (32.8°C) in the affected area with soil moisture at 50%. Check soil moisture at root level and inspect the lower foliage for early blight or pest symptoms.",
         "answer_ta": "உங்கள் சமீபத்திய பயிர் பகுப்பாய்வு **நிலம் 4-ல் (தக்காளி)** லேசான அழுத்தத்தைக் காட்டுகிறது. பாதிக்கப்பட்ட பகுதியில் வெப்ப நிலை 32.8°C ஆக சற்று அதிகமாக உள்ளது. வேர் பகுதியில் மண் ஈரப்பதத்தை சரிபார்த்து, இலைகளில் பூஞ்சை புள்ளிகள் உள்ளதா என கவனிக்கவும்.",

@@ -1,9 +1,10 @@
 import os
 import subprocess
 import shutil
+import tempfile
 
 dst = os.path.abspath("node_modules")
-src = r"C:\Users\saran\AppData\Local\AgriVision_Build\node_modules"
+src = os.path.join(os.environ.get("LOCALAPPDATA", tempfile.gettempdir()), "ArkaAssist_Build", "node_modules")
 
 if os.path.exists(dst):
     # Remove files inside
